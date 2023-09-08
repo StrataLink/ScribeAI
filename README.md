@@ -9,9 +9,9 @@ A full-stack web notes application leveraging speech-to-text and generative summ
 
 1. git clone (HTTPS)
 
-2. npm install
+2. cd my-app
 
-3. cd my-app
+3. npm install
 
 4. npm start
 
