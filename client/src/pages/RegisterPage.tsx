@@ -1,6 +1,7 @@
 // RegisterPage.tsx
 import React, { useState } from "react";
 import "./RegisterPage.css"; // Import your CSS file for styling
+import { useNavigate } from "react-router-dom";
 
 function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -10,6 +11,7 @@ function RegisterPage() {
   const handleRegister = () => {
     // Implement your registration logic here
   };
+  const navigate = useNavigate();
 
   return (
     <div className="register-container">
@@ -42,7 +44,7 @@ function RegisterPage() {
             required
           />
         </div>
-        <button type="submit">Register</button>
+        <button type="submit" onClick={() => navigate("/login")}>Register</button>
       </form>
     </div>
   );

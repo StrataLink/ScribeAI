@@ -1,6 +1,7 @@
 // LoginPage.tsx
 import React, { useState } from "react";
 import "./LoginPage.css"; // Import your CSS file for styling
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -9,6 +10,8 @@ function LoginPage() {
   const handleLogin = () => {
     // Implement your login logic here
   };
+
+  const navigate = useNavigate();
 
   return (
     <div className="login-container">
@@ -32,7 +35,7 @@ function LoginPage() {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" onClick={() => navigate("/main")}>Login</button>
       </form>
     </div>
   );
