@@ -1,14 +1,50 @@
 // LoginPage.tsx
-import React, { useState } from "react";
+import React, { FormEventHandler, useState } from "react";
 import "./LoginPage.css"; // Import your CSS file for styling
 import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleLogin = () => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    setErrorMessage("");
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value)
+    setErrorMessage("");
+  }
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     // Implement your login logic here
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:3001/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        //alert(data.message);
+        navigate("/");
+      } else {
+        const errorData = await response.json();
+        setErrorMessage(errorData.error); // Set error message in state
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const navigate = useNavigate();
@@ -22,7 +58,8 @@ function LoginPage() {
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
+            placeholder="stratalink@gmail.com"
             required
           />
         </div>
@@ -31,7 +68,8 @@ function LoginPage() {
           <input
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handlePasswordChange}
+            placeholder="skyisthelimit27"
             required
           />
         </div>
