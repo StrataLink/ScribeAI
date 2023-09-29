@@ -1,8 +1,11 @@
 .landing-container {
-    max-width: 800px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 20px;
     text-align: center;
+    height: 3800px;
+    background-color: #030C5C;
+    color: white;
   }
   
   header {
