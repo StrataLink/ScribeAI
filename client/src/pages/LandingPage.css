@@ -2,18 +2,42 @@
     max-width: 100%;
     margin: 0 auto;
     padding: 20px;
-    text-align: center;
     height: 3800px;
     background-color: #030C5C;
     color: white;
+    z-index: -2;
   }
+  .shadow{
+    color: red;  
+    text-align: center;  
+    justify-content: center;
+    margin-left: 16%;
+    height: 500px;
+    width: 500px;
+    margin-top: -400PX;
+    position: sticky;
+    background: radial-gradient(circle at center, #60b0df92 30%,#030C5C, #030C5C 100%);
+    border-radius: 200px;
+    opacity: 70%;
+    z-index: -1;
+}
   
   header {
+    position: relative;
     margin-bottom: 20px;
+    margin-left: 20%;
+    z-index: 1;
+    padding: 10px;
+    justify-content: space-between
   }
   
   header h1 {
     font-size: 2rem;
+    width: 350px;
+    margin-top: 150px;
+    font-size: 50px;
+    font-family: Lato;
+    font-weight: bolder;
   }
   
   section {
@@ -22,9 +46,21 @@
   
   section p {
     font-size: 1.2rem;
-    line-height: 1.5;
+    margin-top: -30px;
+    justify-self: left;  
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px;
+    font-family: Lato;
   }
   
+  span{
+    font-size: 10px;
+    margin-top: -100px;
+    position: relative;
+
+  }
+
   .cta-button {
     padding: 10px 20px;
     font-size: 1.2rem;
@@ -66,4 +102,14 @@
 
   .login-button:hover {
     background-color: #0056b3;
+  }
+
+  .imgLaptop{
+    margin-left: 40%;
+    background-color: red;
+    opacity: 70%;
+    padding: 10px;
+    position: absolute;
+    display: inline; 
+    margin-top: -250px;
   }

@@ -2,11 +2,12 @@
     height: 60px;
     width: 100%;
     position: relative;
-    background-color: black;
+    /*background-color: black;*/
     color: white;
     list-style: none;
     margin: 0;
     padding: 5px;
+    font-family: Lato;
 }
 .navbar-container {
     display: flex;
@@ -23,31 +24,38 @@
 
   .navbar-logo{
     list-style-type: none;
-    color: rgb(111, 199, 28);
+    color: rgb(255, 255, 255);
     text-decoration: none;
     text-align: center;
     padding: 10px;
     margin-left: -80%;
+    font-size: 30px;
     position: absolute;
+    font-weight: bolder;
   }
 
-  .nav-item{
-    margin-right: -90%;
+  .nav-menu{
+    justify-content: end;
     list-style-type: none;
     color: rgb(111, 199, 28);
     text-align: left;
     display: inline;
     justify-content: center;
-    padding: 5px;
-    position: relative; 
+    position: absolute; 
+    font-size: 20px;
+    margin-right: -43%;
+  }
+
+  .nav-item{
+    justify-content: center;
+    display: inline;
   }
 
   .nav-links{
     list-style-type: none;
-    color: rgb(111, 199, 28);
+    color: rgb(255, 255, 255);
     text-decoration: none;
-    margin-right: 10% ;
     position: relative;
-    padding: 0px;
+    padding: 20px;
     justify-self: space;
   }
