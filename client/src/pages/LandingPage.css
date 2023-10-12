@@ -1,25 +1,26 @@
 .landing-container {
     max-width: 100%;
     margin: 0 auto;
-    padding: 20px;
     height: 3800px;
     background-color: #030C5C;
     color: white;
     z-index: -2;
+    justify-content: center;
+
   }
   .shadow{
-    color: red;  
     text-align: center;  
     justify-content: center;
     margin-left: 16%;
     height: 500px;
     width: 500px;
-    margin-top: -400PX;
+    margin-top: -350PX;
     position: sticky;
     background: radial-gradient(circle at center, #60b0df92 30%,#030C5C, #030C5C 100%);
     border-radius: 200px;
     opacity: 70%;
     z-index: -1;
+    
 }
   
   header {
@@ -28,13 +29,13 @@
     margin-left: 20%;
     z-index: 1;
     padding: 10px;
-    justify-content: space-between
+    justify-content: center
   }
   
   header h1 {
     font-size: 2rem;
     width: 350px;
-    margin-top: 150px;
+    margin-top: 200px;
     font-size: 50px;
     font-family: Lato;
     font-weight: bolder;
@@ -42,6 +43,8 @@
   
   section {
     margin-bottom: 20px;
+    justify-content:center
+
   }
   
   section p {
@@ -50,15 +53,18 @@
     justify-self: left;  
     font-weight: bold;
     font-size: 20px;
-    padding: 5px;
     font-family: Lato;
   }
   
-  span{
-    font-size: 10px;
-    margin-top: -100px;
-    position: relative;
-
+.smalltxt{
+    margin-top: -20px;
+    position: absolute;
+    font-size: 20px;
+    font-family: Lato;
+    font-weight: normal;
+    justify-self: left;  
+    width: 270px;
+    display:inline-block;
   }
 
   .cta-button {
@@ -70,6 +76,45 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-left: 21%;
+    margin-top: -300px;
+    position: absolute;
+    z-index: 1;
+  }
+
+  .Part2{
+    align-items: self;
+    display: inline; 
+  }
+
+  .h2{
+    font-size: 30px;
+    margin-top: 180px;
+    font-family: Lato;
+    margin-left: 20%;
+  }
+
+  .p{
+    margin-left: 20%;
+    margin-top: 10px;
+    font-size: 25px;
+  }
+
+  .p2{
+    margin-left: 20%;
+    margin-top: 10px;
+    font-weight: normal;
+    max-width: 330px;
+    font-size: 20px;
+  }
+
+  .box1{
+    margin-left: 55%;
+    background-color: #0056b3;
+    height: 300px;
+    width: 400px; 
+    margin-top: -290px;
+
   }
   .register-button {
     padding: 10px 20px;
@@ -105,11 +150,9 @@
   }
 
   .imgLaptop{
-    margin-left: 40%;
-    background-color: red;
-    opacity: 70%;
-    padding: 10px;
+    margin-left: 25%;
+    padding: 5px;
     position: absolute;
     display: inline; 
-    margin-top: -250px;
+    margin-top: -550px;
   }
