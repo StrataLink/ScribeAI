@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "start": "nodemon server.ts"
+    "start": "nodemon --exec ts-node server.ts"
   },
   "author": "",
   "license": "ISC",
