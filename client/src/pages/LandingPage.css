@@ -76,12 +76,18 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-left: 21%;
-    margin-top: -300px;
+    margin-left: 20.7%;
+    margin-top: -50px;
     position: absolute;
     z-index: 1;
   }
 
+  .need-da-space{
+    height: 2px;
+    padding: 0px;
+    margin-bottom: -80px;
+
+  }
   .Part2{
     align-items: self;
     display: inline; 
@@ -116,6 +122,32 @@
     margin-top: -290px;
 
   }
+
+  .Part2p2{
+    margin-left: 45%;
+    margin-top: -100px;
+  }
+
+  .box2{
+    margin-left: -45%;
+    background-color: #0056b3;
+    height: 300px;
+    width: 400px; 
+    margin-top: -250px;
+  }
+
+  .Part2p3{
+    margin-top: -130px;
+  }
+
+  .box3{
+    margin-left: 55%;
+    background-color: #0056b3;
+    height: 300px;
+    width: 400px; 
+    margin-top: -300px;
+  }
+
   .register-button {
     padding: 10px 20px;
     font-size: 1.2rem;

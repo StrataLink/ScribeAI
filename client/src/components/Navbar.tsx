@@ -2,17 +2,21 @@ import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom"
 import "./Navbar.css"
 
-function Navbar() {
+interface NavbarProps{
+    onScroll: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({onScroll}) => {
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
-
+    
   return (
     <nav className="navbar">
         <div className="navbar-container">
-            <Link to="/" className="navbar-logo"onClick={closeMobileMenu}>
+            <button className="navbar-logo" onClick={onScroll}>
                 ScribeAI
-            </Link>
+            </button>
             <ul className={click ? "nav-menu active" : "nav-menu"}>
                 <li className="nav-item">
                     <Link to="/login" className="nav-links" onClick={closeMobileMenu}>
@@ -20,9 +24,9 @@ function Navbar() {
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <Link to="/About" className="nav-links" onClick={closeMobileMenu}>
+                    <button className="butt" onClick={onScroll}>
                         About
-                    </Link>
+                    </button>
                 </li>
                 <li className="nav-item">
                     <Link to="/Pricing" className="nav-links" onClick={closeMobileMenu}>

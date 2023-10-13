@@ -25,6 +25,7 @@
   }
 
   .navbar-logo{
+    all: unset;
     list-style-type: none;
     color: rgb(255, 255, 255);
     text-decoration: none;
@@ -54,6 +55,16 @@
   }
 
   .nav-links{
+    list-style-type: none;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    position: relative;
+    padding: 20px;
+    justify-self: space;
+  }
+
+  .butt{
+    all: unset;
     list-style-type: none;
     color: rgb(255, 255, 255);
     text-decoration: none;
