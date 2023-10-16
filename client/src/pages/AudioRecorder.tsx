@@ -1,32 +1,19 @@
 import React, { useEffect, useState } from "react";
 
-declare var MediaRecorder: any;
-declare global {
-  interface MediaRecorderDataAvailableEvent extends Event {
-    data: Blob;
-  }
-}
-
-const AudioRecorder: React.FC = () => {
+function AudioRecorder() {
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(
     null
   );
-  const [chunks, setChunks] = useState<MediaRecorderDataAvailableEvent[]>([]);
+  const [chunks, setChunks] = useState<Blob[]>([]);
   const [isRecording, setIsRecording] = useState(false);
 
   useEffect(() => {
     let recorder: MediaRecorder | null = null;
-    const handleDataAvailable = (event: MediaRecorderDataAvailableEvent) => {
-      if (event.data.size > 0) {
-        setChunks((prevChunks) => [...prevChunks, event]);
-      }
-    };
 
     navigator.mediaDevices
       .getUserMedia({ audio: true })
       .then((stream) => {
         recorder = new MediaRecorder(stream);
-        if (recorder) recorder.ondataavailable = handleDataAvailable;
         setMediaRecorder(recorder);
       })
       .catch((error) => {
@@ -35,15 +22,53 @@ const AudioRecorder: React.FC = () => {
 
     return () => {
       if (recorder) {
-        recorder.ondataavailable = null; // Remove event listener to prevent memory leaks
-        recorder = null;
+        recorder.onstop = null;
+        recorder.ondataavailable = null;
+        recorder.stream.getTracks().forEach((track) => {
+          track.stop();
+        });
       }
     };
   }, []);
 
+  useEffect(() => {
+    if (mediaRecorder) {
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          setChunks([...chunks, event.data]);
+        }
+      };
+      mediaRecorder.onstop = (event) => {
+        if (chunks.length > 0) {
+          const timestamp = new Date().toISOString(); // Use a timestamp for a unique filename
+          const filename = `audio_${timestamp}.mp3`;
+          const blob = new Blob(chunks, { type: "audio/mp3" });
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = filename;
+
+          // Add the anchor element to the DOM
+          document.body.appendChild(a);
+
+          // Programmatically click the link to initiate the download
+          a.click();
+
+          // Remove the anchor element from the DOM
+          document.body.removeChild(a);
+
+          window.URL.revokeObjectURL(url);
+          setChunks([]); // Clear the chunks
+        }
+        console.log("Recording stopped");
+      };
+    }
+  }, [mediaRecorder, chunks]);
+
   const startRecording = () => {
     if (mediaRecorder) {
       setIsRecording(true);
+      console.log("recording");
       mediaRecorder.start();
     }
   };
@@ -51,6 +76,7 @@ const AudioRecorder: React.FC = () => {
   const stopRecording = () => {
     if (mediaRecorder && isRecording) {
       setIsRecording(false);
+      console.log("stopped recording");
       mediaRecorder.stop();
     }
   };
@@ -59,13 +85,8 @@ const AudioRecorder: React.FC = () => {
     <div>
       <button onClick={startRecording}>Start Recording</button>
       <button onClick={stopRecording}>Stop Recording</button>
-      <div>
-        {chunks.map((chunk) => (
-          <div className="user">{chunk.timeStamp}</div>
-        ))}
-      </div>
     </div>
   );
-};
+}
 
 export default AudioRecorder;
