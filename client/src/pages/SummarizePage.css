@@ -1,0 +1,46 @@
+.SummarizeWhole {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    }
+    .SummarizeTitle {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    }
+    .SummarizeParagraph {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    }
+    .SummarizeText {
+    width: 50%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    }
+    .SummarizeButton {
+    background-color: #007BFF;
+    color: white;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    }
+    .SummarizeButton:hover {
+    background-color: #0056b3;
+    }
+    .SummarizeButton:active {
+    background-color: #004699;
+    }
+    
+    .SummaryBox {
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 400px;
+        height: 200px;
+        margin: 0 auto; /* Center horizontally */
+        word-wrap: break-word;
+        overflow-y: auto;
+      }
+      
