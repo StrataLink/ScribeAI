@@ -3,7 +3,7 @@ import {Link} from "react-router-dom"
 import "./Navbar.css"
 
 interface NavbarProps{
-    onScroll: () => void;
+    onScroll: (id: string) => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({onScroll}) => {
@@ -14,7 +14,7 @@ const Navbar: React.FC<NavbarProps> = ({onScroll}) => {
   return (
     <nav className="navbar">
         <div className="navbar-container">
-            <button className="navbar-logo" onClick={onScroll}>
+            <button className="navbar-logo" onClick={() => onScroll('introduction')}>
                 ScribeAI
             </button>
             <ul className={click ? "nav-menu active" : "nav-menu"}>
@@ -24,14 +24,14 @@ const Navbar: React.FC<NavbarProps> = ({onScroll}) => {
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <button className="butt" onClick={onScroll}>
+                    <button className="butt" onClick={() => onScroll('about')}>
                         About
                     </button>
                 </li>
                 <li className="nav-item">
-                    <Link to="/Pricing" className="nav-links" onClick={closeMobileMenu}>
+                <button className="butt" onClick={() => onScroll('pricing')}>
                         Pricing
-                    </Link>
+                    </button>
                 </li>
             </ul>
         </div>

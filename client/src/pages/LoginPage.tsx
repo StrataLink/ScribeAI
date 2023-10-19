@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import "./LoginPage.css"; // Import your CSS file for styling
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -14,6 +15,7 @@ function LoginPage() {
   const navigate = useNavigate();
 
   return (
+    <div>
     <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
@@ -37,6 +39,7 @@ function LoginPage() {
         </div>
         <button type="submit" onClick={() => navigate("/main")}>Login</button>
       </form>
+    </div>
     </div>
   );
 }

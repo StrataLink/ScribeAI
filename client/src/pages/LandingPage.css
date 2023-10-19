@@ -12,31 +12,30 @@
     text-align: center;  
     justify-content: center;
     margin-left: 16%;
-    height: 500px;
-    width: 500px;
+    height: 550px;
+    width: 550px;
     margin-top: -350PX;
     position: sticky;
     background: radial-gradient(circle at center, #60b0df92 30%,#030C5C, #030C5C 100%);
     border-radius: 200px;
     opacity: 70%;
     z-index: -1;
-    
 }
+
   
   header {
     position: relative;
     margin-bottom: 20px;
-    margin-left: 20%;
+    margin-left: 15%;
     z-index: 1;
     padding: 10px;
     justify-content: center
   }
   
   header h1 {
-    font-size: 2rem;
     width: 350px;
     margin-top: 200px;
-    font-size: 50px;
+    font-size: 55px;
     font-family: Lato;
     font-weight: bolder;
   }
@@ -52,14 +51,14 @@
     margin-top: -30px;
     justify-self: left;  
     font-weight: bold;
-    font-size: 20px;
+    font-size: 25px;
     font-family: Lato;
   }
   
 .smalltxt{
     margin-top: -20px;
     position: absolute;
-    font-size: 20px;
+    font-size: 25px;
     font-family: Lato;
     font-weight: normal;
     justify-self: left;  
@@ -76,8 +75,8 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-left: 20.7%;
-    margin-top: -50px;
+    margin-left: 16%;
+    margin-top: -130px;
     position: absolute;
     z-index: 1;
   }
@@ -97,17 +96,17 @@
     font-size: 30px;
     margin-top: 180px;
     font-family: Lato;
-    margin-left: 20%;
+    margin-left: 15%;
   }
 
   .p{
-    margin-left: 20%;
+    margin-left: 15%;
     margin-top: 10px;
     font-size: 25px;
   }
 
   .p2{
-    margin-left: 20%;
+    margin-left: 15%;
     margin-top: 10px;
     font-weight: normal;
     max-width: 330px;
@@ -115,7 +114,7 @@
   }
 
   .box1{
-    margin-left: 55%;
+    margin-left: 50%;
     background-color: #0056b3;
     height: 300px;
     width: 400px; 
@@ -124,7 +123,7 @@
   }
 
   .Part2p2{
-    margin-left: 45%;
+    margin-left: 41.5%;
     margin-top: -100px;
   }
 
@@ -141,12 +140,60 @@
   }
 
   .box3{
-    margin-left: 55%;
+    margin-left: 50%;
     background-color: #0056b3;
     height: 300px;
     width: 400px; 
     margin-top: -300px;
   }
+
+  .Part3{
+    align-items: center;
+    margin-bottom: 100px;;
+  }
+  .h3{
+    font-size: 50px;
+    font-family: Lato;
+    text-align: center;
+    margin-top: 100px;
+    font-weight: bolder;
+  }
+  .p3{
+    text-align: center;
+    padding: 10px;
+    margin-top: 30px;
+  }
+
+
+  .whbox{
+    justify-content: space-evenly;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-evenly;
+    color: black;
+  }
+
+  .whbox1{
+    background-color: rgb(255, 255, 255);
+    width: 300px;
+    height: 100px;
+    position: relative;
+  }
+  .whbox2{
+    background-color: rgb(255, 255, 255);
+    width: 300px;
+    height: 100px;
+    position: relative;
+  }
+  .whbox3{
+    background-color: rgb(255, 255, 255);
+    width: 300px;
+    height: 100px;
+    position: relative;
+  }
+
+
 
   .register-button {
     padding: 10px 20px;
@@ -169,10 +216,11 @@
     transition: background-color 0.3s ease;
   }
   
+
+
   .cta-button:hover {
     background-color: #0056b3;
   }
-  
   .register-button:hover {
     background-color: #0056b3;
   }
@@ -186,5 +234,5 @@
     padding: 5px;
     position: absolute;
     display: inline; 
-    margin-top: -550px;
+    margin-top: -600px;
   }
