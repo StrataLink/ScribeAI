@@ -1,17 +1,17 @@
 // RegisterPage.tsx
-import React, { useState } from "react";
-import "./RegisterPage.css"; // Import your CSS file for styling
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react"
+import "./RegisterPage.css" // Import your CSS file for styling
+import { useNavigate } from "react-router-dom"
 
 function RegisterPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
 
   const handleRegister = () => {
     // Implement your registration logic here
-  };
-  const navigate = useNavigate();
+  }
+  const navigate = useNavigate()
 
   return (
     <div className="register-container">
@@ -22,7 +22,7 @@ function RegisterPage() {
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
             required
           />
         </div>
@@ -31,7 +31,7 @@ function RegisterPage() {
           <input
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
             required
           />
         </div>
@@ -40,14 +40,16 @@ function RegisterPage() {
           <input
             type="password"
             value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            onChange={e => setConfirmPassword(e.target.value)}
             required
           />
         </div>
-        <button type="submit" onClick={() => navigate("/login")}>Register</button>
+        <button type="submit" onClick={() => navigate("/login")}>
+          Register
+        </button>
       </form>
     </div>
-  );
+  )
 }
 
-export default RegisterPage;
+export default RegisterPage
