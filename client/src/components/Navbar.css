@@ -1,8 +1,7 @@
 .navbar{
     height: 60px;
     width: 100%;
-    position: fixed;
-    background-color: rgb(0, 0, 0);
+    position: absolute;
     color: white;
     list-style: none;
     margin: 0;

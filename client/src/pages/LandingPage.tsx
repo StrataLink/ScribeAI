@@ -21,7 +21,6 @@ const pricing = useRef<HTMLDivElement>(null);
   return (
     <div className="landing-container">
       <Navbar onScroll={scroll}/>
-
       <header ref={intro} id='introduction'>
         <h1>Innovate your note-taking experience</h1>
         <section>
@@ -75,13 +74,71 @@ const pricing = useRef<HTMLDivElement>(null);
           </p>
           <div className="whbox">
             <div className="whbox1">
-                  hi
+              <h4 className="h4">Student</h4>
+              <p className="p4">The basic plan for all students.</p>
+              <div className="money">
+                $0
+                <div className="pmonth"> /MO</div>
+              </div>
+                <div className="chlist"> 
+                  <i className="fa fa-check" style={{color: "green"}}></i> 20 real-time speech-to-text uses. *
+                </div>
+                <div className="chlist"> 
+                  <i className="fa fa-check" style={{color: "green"}}></i> Full access to summarization tool.
+                </div>
+                <div className="chlist"> 
+                  <i className="fa fa-check" style={{color: "green"}}></i> 20 speech saves a month.
+                </div>
+                <button className="getStarted1" onClick={() => navigate("/login")}>Get Started</button>
             </div>
+
+
             <div className="whbox2">
-                  hii
+              <h4 className="h4"> Student+</h4>
+              <p className="p4">Unlimited real-time speech to text.</p>
+                <div className="money">
+                  $5
+                  <div className="pmonth"> /MO</div>
+                </div>
+                <div className="chlist"> 
+                  <i className="fa fa-check" style={{color: "green"}}></i> Unlimited real-time speech-to-text
+                </div>
+                <div className="chlist"> 
+                  <i className="fa fa-check" style={{color: "green"}}></i> 200 minutes of prerecorded speech-to-text.
+                </div>
+                <div className="chlist"> 
+                  <i className="fa fa-check" style={{color: "green"}}></i> 100 speech saves a month.
+                </div>
+                <div className="chlist"> 
+                  <i className="fa fa-check" style={{color: "green"}}></i> No advertisements. Ever.
+                </div>
+                <button className="getStarted2" onClick={() => navigate("/login")}>Get Started</button>
             </div>
+
+
             <div className="whbox3">
-                  hiii
+              <h4 className="h4"> Student Pro</h4>
+              <p className="p4">Limitless access to everything.</p>
+              <div className="money">
+                   $10
+                  <div className="pmonth"> /MO</div>
+                </div>
+                <div className="chlist"> 
+                  <i className="fa fa-check" style={{color: "green"}}></i> All benefits from Student+.
+                </div>
+                <div className="chlist"> 
+                  <i className="fa fa-check" style={{color: "green"}}></i> Unlimited real-time speech-to-text
+                </div>
+                <div className="chlist"> 
+                  <i className="fa fa-check" style={{color: "green"}}></i> Unlimited prerecorded speech-to-text
+                </div>
+                <div className="chlist"> 
+                  <i className="fa fa-check" style={{color: "green"}}></i> 300 speech saves a month.
+                </div>
+                <div className="chlist"> 
+                  <i className="fa fa-check" style={{color: "green"}}></i> More perks coming soon!
+                </div>
+                <button className="getStarted3" onClick={() => navigate("/login")}>Get Started</button>
             </div>
           </div>
         </div>

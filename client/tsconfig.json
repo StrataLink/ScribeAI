@@ -22,7 +22,7 @@
   },
   "include": [
     "src"
-, "src/pages/LandingPage.tsx", "svg.d.ts"  ],
+, "src/pages/LandingPage.js", "svg.d.ts"  ],
   "exclude": [
   "dist",
   "node_modules"
