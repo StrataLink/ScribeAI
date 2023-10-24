@@ -4,7 +4,7 @@
 
 ## Architecture Sketch
 
-![](link_here.png)
+![](https://github.com/StrataLink/ScribeAI/blob/figma-frontend/client/figma-folder/frontend-architecture.png)
 
 _Note: separate backend architecture sketch will be available in api/README.md_
 
