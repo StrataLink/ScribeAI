@@ -3,11 +3,13 @@ import "./LandingPage.css"
 import { useNavigate } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import Laptop from "../images/Laptop.svg"
+import BottomScroll from "../components/BottomScroll"
 
 function LandingPage() {
   const intro = useRef(null)
   const about = useRef(null)
   const pricing = useRef(null)
+  const top = useRef(null)
 
   const scroll = id => {
     const targetE = document.getElementById(id)
@@ -19,6 +21,7 @@ function LandingPage() {
   /*const Laptop = require("../../public/Laptop.svg") as string;*/
   return (
     <div className="landing-container">
+      <BottomScroll onScroll={scroll}/>
       <Navbar onScroll={scroll} />
       <header ref={intro} id="introduction">
         <h1>Innovate your note-taking experience</h1>
@@ -115,6 +118,7 @@ function LandingPage() {
               >
                 Get Started
               </button>
+              <div className="tinytxt">*User has to watch an advertisement after 20 uses in a month. </div>
             </div>
 
             <div className="whbox2">
@@ -184,7 +188,23 @@ function LandingPage() {
             </div>
           </div>
         </div>
-
+        <div className = 'foot'>
+            <div className="g1">
+              <p className='p5'>want to help?</p>
+              <p className='p5'>we're now open source!</p>
+              <p className='p5' style={{color: 'lightblue'}}>link to our repo</p>
+              <p className='p5'>MIT License, StrataLink 2023</p>
+            </div>
+            <div className="g2">
+              <h1 className="h5">ScribeAI</h1>
+              <p className="p6">Start</p>
+              <p className="p6">About</p>
+              <p className="p6">Pricing</p>
+            </div>
+            <div className="g3">
+              <h1 className="h5">Contacts</h1>
+            </div>
+        </div>
         <button
           className="register-button"
           onClick={() => navigate("/register")}

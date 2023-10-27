@@ -1,0 +1,25 @@
+.scrollbutt{
+    all: unset;
+    color: rgb(244, 212, 252);
+    background-color: rgb(171, 90, 241);
+    margin-left: 93%;
+    margin-top: 600px;
+    position: fixed;
+    z-index: 4;
+    font-size: 50px;
+    width: 0;
+    word-wrap: break-word;
+    padding: 0;
+}
+
+.fill{
+    margin-left: 93.3%;
+    margin-top: 610px;
+    z-index: 3;
+    position: fixed;
+    height: 35px;
+    width: 35px;
+    border-radius: 20px;
+    background-color: rgb(171, 90, 241);
+
+}

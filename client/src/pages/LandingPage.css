@@ -1,7 +1,7 @@
 .landing-container {
     max-width: 100%;
     margin: 0 auto;
-    height: 3800px;
+    height: 3100px;
     background-color: #030C5C;
     color: white;
     z-index: -2;
@@ -139,6 +139,12 @@
     margin-top: -130px;
   }
 
+  .tinytxt{
+    margin-top: 30px;
+    font-size: 10px;
+    font-family: Lato;
+  }
+
   .box3{
     margin-left: 50%;
     background-color: #0056b3;
@@ -155,7 +161,7 @@
     font-size: 50px;
     font-family: Lato;
     text-align: center;
-    margin-top: 100px;
+    margin-top: 50px;
     font-weight: bolder;
   }
   .p3{
@@ -290,8 +296,48 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  
 
+  .foot{
+    margin-top: 200px;
+    justify-content: space-evenly;
+    display: inline;
+    text-align: left;
+  }
+  .g1{
+    position: absolute;
+    margin-top: 100px;
+    margin-left: 18%
+  }
+  .p5{
+    font-family: Lato;
+    font-size: 15px;
+    padding: 30px;
+    position: relative;
+  }
+
+  .g2{
+    position: absolute;
+    margin-top: 68px;
+    align-items: baseline;
+    margin-left: 45%
+  }
+
+  .h5{
+    font-size: 32px;
+  }
+
+  .p6{
+    margin-top: 28px;
+    font-weight: normal;
+  }
+  
+  .g3{
+    position: absolute;
+    margin-top: 68px;
+    align-items: baseline;
+    margin-left: 68%
+
+  }
 
   .cta-button:hover {
     background-color: #0056b3;
