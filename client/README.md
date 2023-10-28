@@ -18,6 +18,10 @@ _Note: separate backend architecture sketch will be available in api/README.md_
 
 ### Landing Page
 
+![](https://github.com/StrataLink/ScribeAI/blob/figma-main-page/client/figma-folder/mainpage-sketch.png)
+
+_Note, tentative to change - this is an early sketch_
+
 ### Login Page
 
 ### Register Page
