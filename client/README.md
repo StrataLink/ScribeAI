@@ -18,6 +18,10 @@ _Note: separate backend architecture sketch will be available in api/README.md_
 
 ### Landing Page
 
+![]()
+
+_Note, tentative to change - this is an early sketch_
+
 ### Login Page
 
 ### Register Page
@@ -27,3 +31,5 @@ _Note: separate backend architecture sketch will be available in api/README.md_
 _tentative to change_
 
 _last updated 10/24/23_
+
+_Sketches by Tashi Sherpa_
