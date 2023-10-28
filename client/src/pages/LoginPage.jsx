@@ -1,17 +1,42 @@
 // LoginPage.tsx
-import React, { useState } from "react"
-import "./LoginPage.css" // Import your CSS file for styling
-import { useNavigate } from "react-router-dom"
+import React, { useState } from "react";
+import "./LoginPage.css"; // Import your CSS file for styling
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { apiURL } from "../utils/URL";
 
 function LoginPage() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
+  const handleLogin = async (e) => {
     // Implement your login logic here
-  }
-
-  const navigate = useNavigate()
+    e.preventDefault();
+    console.log("hello");
+    try {
+      const response = await axios.post(
+        `${apiURL}/api/auth/login`,
+        {
+          name,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      console.log("Response", response);
+      if (response && response.status === 200) {
+        navigate("/main");
+      }
+    } catch (error) {
+      console.error("Error:", error.response);
+      alert("Incorrect email and/or password.");
+    }
+  };
 
   return (
     <div>
@@ -19,11 +44,11 @@ function LoginPage() {
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
           <div className="form-group">
-            <label>Email:</label>
+            <label>Username:</label>
             <input
-              type="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              type="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               required
             />
           </div>
@@ -32,17 +57,18 @@ function LoginPage() {
             <input
               type="password"
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
-          <button type="submit" onClick={() => navigate("/main")}>
-            Login
+          <button type="submit">Login</button>
+          <button type="submit" onClick={() => navigate("/register")}>
+            Sign Up
           </button>
         </form>
       </div>
     </div>
-  )
+  );
 }
 
-export default LoginPage
+export default LoginPage;

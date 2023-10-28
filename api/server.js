@@ -46,6 +46,13 @@ app.listen(3001, () =>
 //   },
 // });
 
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
+
 // io.on("connection", (socket) => {
 //   socket.on("joined room", (roomCode) => {
 //     socket.join(roomCode);

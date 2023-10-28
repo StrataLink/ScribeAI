@@ -7,6 +7,7 @@
 ![](https://github.com/StrataLink/ScribeAI/blob/figma-frontend/client/figma-folder/frontend-architecture.png)
 
 #### Guide:
+
 **Green Square: main components of webpage - accessible through different routing link, denoted by black arrow (normal)**
 
 **Orange Square: backend/api capabilities - denoted with RED arrows as well**
