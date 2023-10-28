@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 function AudioRecorder() {
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(
@@ -6,6 +6,7 @@ function AudioRecorder() {
   );
   const [chunks, setChunks] = useState<Blob[]>([]);
   const [isRecording, setIsRecording] = useState(false);
+  const chunksRef = useRef<Blob[]>([]);
 
   useEffect(() => {
     let recorder: MediaRecorder | null = null;
@@ -32,41 +33,35 @@ function AudioRecorder() {
   }, []);
 
   useEffect(() => {
+    console.log("called");
     if (mediaRecorder) {
-      mediaRecorder.ondataavailable = (event) => {
+      mediaRecorder.ondataavailable = async (event) => {
         if (event.data.size > 0) {
-          setChunks((prevChunks) => [...prevChunks, event.data]);
-          console.log(chunks);
+          const newChunk = event.data;
+          chunksRef.current.push(newChunk);
+
+          if (!isRecording && chunksRef.current.length > 0) {
+            mediaRecorder.onstop = (event) => {
+              const timestamp = new Date().toISOString();
+              const filename = `audio_${timestamp}.mp3`;
+              const blob = new Blob(chunksRef.current, { type: "audio/mp3" });
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url;
+              a.download = filename;
+
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              window.URL.revokeObjectURL(url);
+              chunksRef.current = [];
+              console.log("Recording stopped");
+            };
+          }
         }
       };
-      if (!isRecording) {
-        mediaRecorder.onstop = (event) => {
-          if (chunks.length > 0) {
-            const timestamp = new Date().toISOString(); // Use a timestamp for a unique filename
-            const filename = `audio_${timestamp}.mp3`;
-            const blob = new Blob(chunks, { type: "audio/mp3" });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = filename;
-
-            // Add the anchor element to the DOM
-            document.body.appendChild(a);
-
-            // Programmatically click the link to initiate the download
-            a.click();
-
-            // Remove the anchor element from the DOM
-            document.body.removeChild(a);
-
-            window.URL.revokeObjectURL(url);
-            setChunks([]); // Clear the chunks
-          }
-          console.log("Recording stopped");
-        };
-      }
     }
-  }, [mediaRecorder, chunks, isRecording]);
+  }, [mediaRecorder, isRecording]);
 
   const startRecording = () => {
     if (mediaRecorder) {
