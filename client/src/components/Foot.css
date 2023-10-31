@@ -1,0 +1,66 @@
+.foot{
+    margin-top: 200px;
+    background-color: black;
+    justify-content: space-evenly;
+    display: inline;
+    text-align: left;
+    width: 100%;
+    height: 500px;
+  }
+  .g1{
+    position: absolute;
+    margin-top: 100px;
+    margin-left: 18%
+  }
+  .p5{
+    font-family: Lato;
+    font-size: 15px;
+    padding: 30px;
+    position: relative;
+  }
+
+  .g2{
+    position: absolute;
+    margin-top: 68px;
+    align-items: baseline;
+    margin-left: 45%
+  }
+
+  .h5{
+    font-size: 32px;
+    margin-bottom: -2px;
+  }
+
+  .p6{
+    margin-top: 28px;
+    font-weight: normal;
+  }
+  
+  .g3{
+    position: absolute;
+    margin-top: 68px;
+    align-items: baseline;
+    margin-left: 68%
+
+  }
+
+  .brands {
+    margin-right: 10px;
+  }
+
+  .butt2{
+    all: unset;
+    list-style-type: none;
+    color: rgb(255, 255, 255);
+    text-decoration: list;
+    text-align: left;
+    position: relative;
+    padding: 20px;
+    justify-self: space;
+  }
+
+  .listt{
+    list-style-type: none;
+    margin-left: -17px;
+    font-size: 20px;
+}

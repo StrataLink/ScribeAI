@@ -26,7 +26,7 @@
   header {
     position: relative;
     margin-bottom: 20px;
-    margin-left: 15%;
+    margin-left: 20%;
     z-index: 1;
     padding: 10px;
     justify-content: center
@@ -75,7 +75,7 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-left: 16%;
+    margin-left: 20.5%;
     margin-top: -130px;
     position: absolute;
     z-index: 1;
@@ -90,23 +90,24 @@
   .Part2{
     align-items: self;
     display: inline; 
+    justify-content: space-evenly;
   }
 
   .h2{
     font-size: 30px;
     margin-top: 180px;
     font-family: Lato;
-    margin-left: 15%;
+    margin-left: 23%;
   }
 
   .p{
-    margin-left: 15%;
+    margin-left: 23%;
     margin-top: 10px;
     font-size: 25px;
   }
 
   .p2{
-    margin-left: 15%;
+    margin-left: 23%;
     margin-top: 10px;
     font-weight: normal;
     max-width: 330px;
@@ -114,7 +115,7 @@
   }
 
   .box1{
-    margin-left: 50%;
+    margin-left: 55%;
     background-color: #0056b3;
     height: 300px;
     width: 400px; 
@@ -128,7 +129,7 @@
   }
 
   .box2{
-    margin-left: -45%;
+    margin-left: -31.5%;
     background-color: #0056b3;
     height: 300px;
     width: 400px; 
@@ -146,7 +147,7 @@
   }
 
   .box3{
-    margin-left: 50%;
+    margin-left: 55%;
     background-color: #0056b3;
     height: 300px;
     width: 400px; 
@@ -297,48 +298,6 @@
     transition: background-color 0.3s ease;
   }
 
-  .foot{
-    margin-top: 200px;
-    justify-content: space-evenly;
-    display: inline;
-    text-align: left;
-  }
-  .g1{
-    position: absolute;
-    margin-top: 100px;
-    margin-left: 18%
-  }
-  .p5{
-    font-family: Lato;
-    font-size: 15px;
-    padding: 30px;
-    position: relative;
-  }
-
-  .g2{
-    position: absolute;
-    margin-top: 68px;
-    align-items: baseline;
-    margin-left: 45%
-  }
-
-  .h5{
-    font-size: 32px;
-  }
-
-  .p6{
-    margin-top: 28px;
-    font-weight: normal;
-  }
-  
-  .g3{
-    position: absolute;
-    margin-top: 68px;
-    align-items: baseline;
-    margin-left: 68%
-
-  }
-
   .cta-button:hover {
     background-color: #0056b3;
   }
@@ -351,7 +310,7 @@
   }
 
   .imgLaptop{
-    margin-left: 25%;
+    margin-left: 23%;
     padding: 5px;
     position: absolute;
     display: inline; 
