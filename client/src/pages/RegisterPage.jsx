@@ -15,7 +15,6 @@ function RegisterPage() {
   const handleRegister = async (e) => {
     // Implement your registration logic here
     e.preventDefault();
-    console.log("sanity check");
     try {
       const response = await axios.post(
         `${apiURL}/api/auth/register`,
@@ -31,8 +30,6 @@ function RegisterPage() {
           withCredentials: true,
         }
       );
-      console.log(response.status);
-      console.log(response);
       if ((response && response.status === 200) || response.status === 304) {
         if (password === confirmPassword) {
           navigate("/login");
@@ -40,9 +37,9 @@ function RegisterPage() {
           alert("Confirmed password is different from password.");
         }
       }
-    } catch (error) {
-      console.error("Error:", error.response);
-      alert("Try again.");
+    } catch (e) {
+      console.error("Error:", e.response);
+      alert(e.response.data.error);
     }
   };
 

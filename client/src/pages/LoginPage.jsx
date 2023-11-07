@@ -1,24 +1,23 @@
 // LoginPage.tsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./LoginPage.css"; // Import your CSS file for styling
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { apiURL } from "../utils/URL";
 
 function LoginPage() {
-  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     // Implement your login logic here
     e.preventDefault();
-    console.log("hello");
     try {
       const response = await axios.post(
         `${apiURL}/api/auth/login`,
         {
-          name,
+          email,
           password,
         },
         {
@@ -28,13 +27,12 @@ function LoginPage() {
           withCredentials: true,
         }
       );
-      console.log("Response", response);
       if (response && response.status === 200) {
         navigate("/main");
       }
-    } catch (error) {
-      console.error("Error:", error.response);
-      alert("Incorrect email and/or password.");
+    } catch (e) {
+      console.error("Error:", e.response);
+      alert(e.response.data.error);
     }
   };
 
@@ -44,11 +42,11 @@ function LoginPage() {
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
           <div className="form-group">
-            <label>Username:</label>
+            <label>Email:</label>
             <input
-              type="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
