@@ -14,10 +14,11 @@ function RegisterPage() {
   const navigate = useNavigate()
 
   return (
+    <div className="register-main">
     <div className="register-container">
       <h2>Register</h2>
       <form onSubmit={handleRegister}>
-        <div className="form-group">
+        <div className="form-groupR">
           <label>Email:</label>
           <input
             type="email"
@@ -26,7 +27,7 @@ function RegisterPage() {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-groupR">
           <label>Password:</label>
           <input
             type="password"
@@ -35,7 +36,7 @@ function RegisterPage() {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-groupR">
           <label>Confirm Password:</label>
           <input
             type="password"
@@ -48,6 +49,7 @@ function RegisterPage() {
           Register
         </button>
       </form>
+    </div>
     </div>
   )
 }

@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import "./LoginPage.css" // Import your CSS file for styling
 import { useNavigate } from "react-router-dom"
 
+
 function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -14,11 +15,12 @@ function LoginPage() {
   const navigate = useNavigate()
 
   return (
-    <div>
+    <div className="login-main">
+      <div className="userL"><i className="fa fa-user-circle"></i></div>
       <div className="login-container">
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
-          <div className="form-group">
+          <div className="form-groupL">
             <label>Email:</label>
             <input
               type="email"
@@ -27,7 +29,7 @@ function LoginPage() {
               required
             />
           </div>
-          <div className="form-group">
+          <div className="form-groupL">
             <label>Password:</label>
             <input
               type="password"

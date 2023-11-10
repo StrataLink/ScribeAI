@@ -1,28 +1,41 @@
+.register-main{
+  background-color: #9197d3;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(#bcc2ff, 30%, #0017e6);
+  position: absolute;
+  font-family: Lato;
+}
+
 .register-container {
-    max-width: 400px;
-    margin: 0 auto;
+    max-width: 500px;
+    position: relative;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
   }
   
   .register-container h2 {
     margin-bottom: 20px;
+    text-align: center;
   }
   
-  .form-group {
+  .form-groupR {
     margin-bottom: 15px;
   }
   
-  .form-group label {
+  .form-groupR label {
     display: block;
     margin-bottom: 5px;
   }
   
-  .form-group input {
-    width: 100%;
+  .form-groupR input {
+    width: 95%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
