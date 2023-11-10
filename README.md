@@ -1,21 +1,47 @@
 # ScribeAI
 
-A full-stack web notes application leveraging speech-to-text and generative summary AI to help students.
+## Overview
+ScribeAI is an innovative full-stack web notes application designed to assist students. It uniquely combines speech-to-text capabilities with advanced generative summary AI, streamlining the note-taking process and enhancing learning efficiency.
 
-### The Team
+## Installation Guide
 
-#### Tashi Sherpa, Ryan Cheng, Jason Chen, Rachel Tsui
+To get ScribeAI up and running on your local machine, follow these simple steps:
 
-### How to install
+### Clone the Repository
+```
+git clone https://github.com/StrataLink/ScribeAI.git
+```
 
-1. git clone (HTTPS)
+### Install Dependencies
+Navigate to the project directory and install the necessary dependencies.
+```
+npm install
+```
 
-2. cd my-app
+### Start the Backend
+```
+cd api
+npm start
+```
 
-3. npm install
+### Launch the Frontend (In a New Terminal)
+```
+cd client
+npm start
+```
 
-4. npm start
+## Technology Stack
 
-### Tech Stack
+- **Frontend:** ReactJS, JavaScript, HTML, CSS
+- **Backend:** Python, NodeJS, ExpressJS, MongoDB
 
-##### We use the **MERN** tech stack: MongoDB, Express.js, React.js, and Node.js.
+## Contributors
+
+- Tashi Sherpa
+- Ryan Cheng
+- Jason Chen
+- Rachel Tsui
+
+## License
+
+- Licensed under the MIT License.
