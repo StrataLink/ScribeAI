@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const allRoutes = require("./routes/index.js");
 const cookieParser = require("cookie-parser");
+const { spawn } = require("child_process");
 
 require("dotenv").config();
 /*
@@ -35,32 +36,30 @@ mongoose
   .then(() => console.log("Connected to DB"))
   .catch(console.error);
 
-app.listen(3001, () =>
+const server = app.listen(3001, () =>
   console.log("Server started on port 3001")
 );
 
-// Not needed
-// const io = require("socket.io")(server, {
-//   cors: {
-//     origin: ["http://localhost:3000"],
-//   },
-// });
+const io = require("socket.io")(server, {
+  cors: {
+    origin: ["http://localhost:3000"],
+  },
+});
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-  })
-);
+io.on("connection", (socket) => {
+  socket.on("transcribeAudio", (audioChunk) => {
+    const pythonProcess = spawn("python3", ["./utils/whisper.py", audioChunk]);
 
-// io.on("connection", (socket) => {
-//   socket.on("joined room", (roomCode) => {
-//     socket.join(roomCode);
-//     console.log("User Joined Room: " + roomCode);
-//   });
-//   socket.on("new message", (newMessageRecieved) => {
-//     socket
-//       .to(newMessageRecieved.room._id)
-//       .emit("message received", newMessageRecieved);
-//   });
-// });
+    pythonProcess.stdout.on("data", (data) => {
+      socket.emit("transcription", data.toString());
+    });
+
+    pythonProcess.stderr.on("data", (data) => {
+      console.error(`stderr: ${data}`);
+    });
+
+    pythonProcess.on("close", (code) => {
+      console.log(`child process exited with code ${code}`);
+    });
+  });
+});
