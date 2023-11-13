@@ -1,10 +1,28 @@
 import React, { useEffect, useState, useRef } from "react";
+import { io } from "socket.io-client";
 
 function AudioRecorder() {
+  const [socket, setSocket] = useState(null);
   const [mediaRecorder, setMediaRecorder] = useState(null);
   const [chunks, setChunks] = useState([]);
   const [isRecording, setIsRecording] = useState(false);
   const chunksRef = useRef([]);
+
+  useEffect(() => {
+    const initializeSocket = () => {
+      const newSocket = io("http://localhost:3001");
+      setSocket(newSocket);
+    };
+
+    initializeSocket();
+  }, []);
+
+  useEffect(() => {
+    if (socket) {
+      console.log("worked");
+      socket.emit("joined", isRecording);
+    }
+  }, [socket]);
 
   useEffect(() => {
     let recorder = null;
@@ -31,41 +49,32 @@ function AudioRecorder() {
   }, []);
 
   useEffect(() => {
-    console.log("called");
-    if (mediaRecorder) {
+    if (isRecording && mediaRecorder) {
       mediaRecorder.ondataavailable = async (event) => {
         if (event.data.size > 0) {
-          const newChunk = event.data;
-          chunksRef.current.push(newChunk);
-
-          if (!isRecording && chunksRef.current.length > 0) {
-            mediaRecorder.onstop = (event) => {
-              const timestamp = new Date().toISOString();
-              const filename = `audio_${timestamp}.mp3`;
-              const blob = new Blob(chunksRef.current, { type: "audio/mp3" });
-              const url = window.URL.createObjectURL(blob);
-              const a = document.createElement("a");
-              a.href = url;
-              a.download = filename;
-
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-              window.URL.revokeObjectURL(url);
-              chunksRef.current = [];
-              console.log("Recording stopped");
-            };
-          }
+          const reader = new FileReader();
+          reader.readAsDataURL(event.data); // Convert Blob to Base64
+          reader.onloadend = function () {
+            const base64data = reader.result;
+            if (socket) {
+              socket.emit("transcribeAudio", base64data); // Send the Base64 string
+            }
+          };
+          // Clear the reference array after sending
+          chunksRef.current = [];
         }
       };
+      return () => {
+        mediaRecorder.ondataavailable = null; // Reset the event handler
+      };
     }
-  }, [mediaRecorder, isRecording]);
+  }, [isRecording, mediaRecorder, socket]);
 
   const startRecording = () => {
     if (mediaRecorder) {
       setIsRecording(true);
       console.log("recording");
-      mediaRecorder.start();
+      mediaRecorder.start(2000);
     }
   };
 
