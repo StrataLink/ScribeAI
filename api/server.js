@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const allRoutes = require("./routes/index.js");
 const cookieParser = require("cookie-parser");
-const { spawn } = require("child_process");
 
 require("dotenv").config();
 /*
@@ -46,20 +45,53 @@ const io = require("socket.io")(server, {
   },
 });
 
+const fs = require("fs");
+const fsPromises = require("fs").promises; // For promise-based operations
+const { spawn } = require("child_process");
+const { v4: uuidv4 } = require("uuid");
+
 io.on("connection", (socket) => {
-  socket.on("transcribeAudio", (audioChunk) => {
-    const pythonProcess = spawn("python3", ["./utils/whisper.py", audioChunk]);
+  socket.on("transcribeAudio", async (audioChunk) => {
+    const tempDir = "./temp";
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir);
+    }
+    const tempFilePath = `./temp/${uuidv4()}.wav`;
 
-    pythonProcess.stdout.on("data", (data) => {
-      socket.emit("transcription", data.toString());
-    });
+    try {
+      await fsPromises.writeFile(tempFilePath, audioChunk, {
+        encoding: "binary",
+      }); // Use await to ensure completion
+      console.log("File written successfully");
+      // Spawn the Python process here, after file has been written
+      const pythonProcess = spawn("python3", [
+        "./utils/transcribe.py",
+        tempFilePath,
+      ]);
 
-    pythonProcess.stderr.on("data", (data) => {
-      console.error(`stderr: ${data}`);
-    });
+      pythonProcess.stdout.on("data", (data) => {
+        socket.emit("transcription", data.toString());
+      });
 
-    pythonProcess.on("close", (code) => {
-      console.log(`child process exited with code ${code}`);
-    });
+      pythonProcess.stderr.on("data", (data) => {
+        console.error(`stderr: ${data}`);
+      });
+      pythonProcess.on("close", (code) => {
+        console.log(`child process exited with code ${code}`);
+
+        // Perform file deletion here
+        try {
+          if (fs.existsSync(tempFilePath)) {
+            fs.unlinkSync(tempFilePath);
+            console.log("Temporary file deleted successfully.");
+          }
+        } catch (unlinkErr) {
+          console.error("Error deleting temporary file:", unlinkErr);
+        }
+      });
+    } catch (err) {
+      console.error("Error writing audio to file:", err);
+      // Handle error appropriately
+    }
   });
 });
