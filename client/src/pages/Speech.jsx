@@ -3,93 +3,79 @@ import { io } from "socket.io-client";
 
 function AudioRecorder() {
   const [socket, setSocket] = useState(null);
-  const [mediaRecorder, setMediaRecorder] = useState(null);
-  const [chunks, setChunks] = useState([]);
   const [isRecording, setIsRecording] = useState(false);
-  const chunksRef = useRef([]);
+  const intervalRef = useRef(null);
 
   useEffect(() => {
-    const initializeSocket = () => {
-      const newSocket = io("http://localhost:3001");
-      setSocket(newSocket);
-    };
+    const newSocket = io("http://localhost:3001");
+    setSocket(newSocket);
 
-    initializeSocket();
+    return () => {
+      newSocket.disconnect();
+    };
   }, []);
 
-  useEffect(() => {
-    if (socket) {
-      console.log("worked");
-      socket.emit("joined", isRecording);
+  const handleDataAvailable = (event) => {
+    if (event.data.size > 0 && socket) {
+      socket.emit("transcribeAudio", event.data);
     }
-  }, [socket]);
+  };
 
-  useEffect(() => {
-    let recorder = null;
-
+  const startNewRecorder = () => {
     navigator.mediaDevices
       .getUserMedia({ audio: true })
       .then((stream) => {
-        recorder = new MediaRecorder(stream);
-        setMediaRecorder(recorder);
+        const recorder = new MediaRecorder(stream);
+        recorder.ondataavailable = handleDataAvailable;
+        recorder.start();
+        // Stop recording after a short duration
+        setTimeout(() => {
+          recorder.stop();
+          stream.getTracks().forEach((track) => track.stop());
+        }, 5000); // Adjust this duration as needed
       })
       .catch((error) => {
         console.error("Error accessing microphone:", error);
       });
-
-    return () => {
-      if (recorder) {
-        recorder.onstop = null;
-        recorder.ondataavailable = null;
-        recorder.stream.getTracks().forEach((track) => {
-          track.stop();
-        });
-      }
-    };
-  }, []);
+  };
 
   useEffect(() => {
-    if (isRecording && mediaRecorder) {
-      mediaRecorder.ondataavailable = async (event) => {
-        if (event.data.size > 0) {
-          const reader = new FileReader();
-          reader.readAsDataURL(event.data); // Convert Blob to Base64
-          reader.onloadend = function () {
-            const base64data = reader.result;
-            if (socket) {
-              socket.emit("transcribeAudio", base64data); // Send the Base64 string
-            }
-          };
-          // Clear the reference array after sending
-          chunksRef.current = [];
-        }
-      };
-      return () => {
-        mediaRecorder.ondataavailable = null; // Reset the event handler
-      };
+    if (isRecording) {
+      console.log("Recording started");
+      startNewRecorder();
+      intervalRef.current = setInterval(startNewRecorder, 5000); // Adjust this interval as needed
+    } else {
+      console.log("Recording stopped");
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     }
-  }, [isRecording, mediaRecorder, socket]);
+  }, [isRecording]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("transcription", (data) => {
+        console.log(data);
+      });
+    }
+  }, [socket]);
 
   const startRecording = () => {
-    if (mediaRecorder) {
-      setIsRecording(true);
-      console.log("recording");
-      mediaRecorder.start(2000);
-    }
+    setIsRecording(true);
   };
 
   const stopRecording = () => {
-    if (mediaRecorder && isRecording) {
-      setIsRecording(false);
-      console.log("stopped recording");
-      mediaRecorder.stop();
-    }
+    setIsRecording(false);
   };
 
   return (
     <div>
-      <button onClick={startRecording}>Start Recording</button>
-      <button onClick={stopRecording}>Stop Recording</button>
+      <button onClick={startRecording} disabled={isRecording}>
+        Start Recording
+      </button>
+      <button onClick={stopRecording} disabled={!isRecording}>
+        Stop Recording
+      </button>
     </div>
   );
 }
