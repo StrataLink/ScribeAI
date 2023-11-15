@@ -44,14 +44,14 @@ router.post("/login", async (req, res) => {
 router.post("/register", async (req, res) => {
   try {
     const newPassword = await bcryptjs.hash(req.body.password, 10);
-    await User.create({
+    const user = await User.create({
       name: req.body.name,
       email: req.body.email,
       password: newPassword,
     });
-    res.status(200).json({ message: "Successful registration." });
+    res.status(200).json({ message: "Successful registration." , userId: user._id});
   } catch (e) {
-    console.error();
+    console.error(e);
     res.status(401).json({ error: "Failed registration." });
   }
 });

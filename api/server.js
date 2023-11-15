@@ -35,32 +35,63 @@ mongoose
   .then(() => console.log("Connected to DB"))
   .catch(console.error);
 
-app.listen(3001, () =>
+const server = app.listen(3001, () =>
   console.log("Server started on port 3001")
 );
 
-// Not needed
-// const io = require("socket.io")(server, {
-//   cors: {
-//     origin: ["http://localhost:3000"],
-//   },
-// });
+const io = require("socket.io")(server, {
+  cors: {
+    origin: ["http://localhost:3000"],
+  },
+});
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-  })
-);
+const fs = require("fs");
+const fsPromises = require("fs").promises; // For promise-based operations
+const { spawn } = require("child_process");
+const { v4: uuidv4 } = require("uuid");
 
-// io.on("connection", (socket) => {
-//   socket.on("joined room", (roomCode) => {
-//     socket.join(roomCode);
-//     console.log("User Joined Room: " + roomCode);
-//   });
-//   socket.on("new message", (newMessageRecieved) => {
-//     socket
-//       .to(newMessageRecieved.room._id)
-//       .emit("message received", newMessageRecieved);
-//   });
-// });
+io.on("connection", (socket) => {
+  socket.on("transcribeAudio", async (audioChunk) => {
+    const tempDir = "./temp";
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir);
+    }
+    const tempFilePath = `./temp/${uuidv4()}.wav`;
+
+    try {
+      await fsPromises.writeFile(tempFilePath, audioChunk, {
+        encoding: "binary",
+      }); // Use await to ensure completion
+      console.log("File written successfully");
+      // Spawn the Python process here, after file has been written
+      const pythonProcess = spawn("python3", [
+        "./utils/transcribe.py",
+        tempFilePath,
+      ]);
+
+      pythonProcess.stdout.on("data", (data) => {
+        socket.emit("transcription", data.toString());
+      });
+
+      pythonProcess.stderr.on("data", (data) => {
+        console.error(`stderr: ${data}`);
+      });
+      pythonProcess.on("close", (code) => {
+        console.log(`child process exited with code ${code}`);
+
+        // Perform file deletion here
+        try {
+          if (fs.existsSync(tempFilePath)) {
+            fs.unlinkSync(tempFilePath);
+            console.log("Temporary file deleted successfully.");
+          }
+        } catch (unlinkErr) {
+          console.error("Error deleting temporary file:", unlinkErr);
+        }
+      });
+    } catch (err) {
+      console.error("Error writing audio to file:", err);
+      // Handle error appropriately
+    }
+  });
+});

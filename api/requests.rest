@@ -1,0 +1,71 @@
+# This is not used - Postman used instead (this is a reference)
+
+@hostname = http://localhost:3001
+
+### Register a new user
+POST {{hostname}}/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "password123"
+}
+
+### Login to get a token (this token needs to be copied manually to the header of other requests)
+POST {{hostname}}/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "john@example.com",
+    "password": "password123"
+}
+
+### Create post 1 (repeat this request two more times with different titles and content for 3 posts)
+POST {{hostname}}/entry/add-entry HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer your_token_here
+
+{
+    "user": "user_id_obtained_after_registration",
+    "title": "Post Title 1",
+}
+
+POST {{hostname}}/entry/add-entry HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer your_token_here
+
+{
+    "user": "user_id_obtained_after_registration",
+    "title": "Post Title 2",
+}
+
+POST {{hostname}}/entry/add-entry HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer your_token_here
+
+{
+    "user": "user_id_obtained_after_registration",
+    "title": "Post Title 3",
+}
+
+### Get all posts
+GET {{hostname}}/entry/get-entries HTTP/1.1
+Authorization: Bearer your_token_here
+
+### Delete a post (use the _id of the post you want to delete)
+DELETE {{hostname}}/entry/delete-entry/post_id_to_delete HTTP/1.1
+Authorization: Bearer your_token_here
+
+### Update a post (use the _id of the post you want to update)
+PATCH {{hostname}}/entry/update-entry/post_id_to_update HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer your_token_here
+
+{
+    "title": "Updated Post Title"
+}
+
+### Get all posts again to see the changes
+GET {{hostname}}/entry/get-entries HTTP/1.1
+Authorization: Bearer your_token_here
