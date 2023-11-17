@@ -7,9 +7,7 @@ import stopIcon from "../images/stopRecording.png"; // make sure to add an icon 
 const Entry = ({ setEntries, entryCode }) => {
   const [initial, setInitial] = useState(true);
   const [title, setTitle] = useState("Untitled");
-  const [text, setText] = useState(
-    "Let's get started, everyone. Today's topic is the three main learning principles for Machine Learning..."
-  );
+  const [text, setText] = useState("");
   const textRef = useRef(""); // useRef to keep track of the current text without causing re-renders
   const [socket, setSocket] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
@@ -48,6 +46,27 @@ const Entry = ({ setEntries, entryCode }) => {
     }
   };
 
+  const handleUpdate = async () => {
+    try {
+      const res = await fetch(
+        `http://localhost:3001/api/entry/update-entry/${entryCode}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ text: text }),
+        }
+      );
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      // Handle error (e.g., show error message, log the error, etc.)
+      console.error("Error getting room:", error);
+    }
+  };
+
   const handleDataAvailable = (event) => {
     if (event.data.size > 0 && socket) {
       socket.emit("transcribeAudio", event.data);
@@ -76,6 +95,12 @@ const Entry = ({ setEntries, entryCode }) => {
     textRef.current += newData; // Append new data to the current text
     setText(textRef.current); // Update state to re-render and show the new text
   };
+
+  useEffect(() => {
+    if (text !== "") {
+      handleUpdate();
+    }
+  }, [text]);
 
   useEffect(() => {
     if (isRecording) {

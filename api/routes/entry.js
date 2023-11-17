@@ -63,13 +63,11 @@ router.delete("/delete-entry/:id", async (req, res) => {
   }
 });
 
-router.patch("/update-entry/:id", async (req, res) => {
+router.put("/update-entry/:id", async (req, res) => {
   try {
-    const updatedEntry = await Entry.findByIdAndUpdate(
-      req.params.id,
-      { $set: req.body },
-      { new: true, runValidators: true }
-    );
+    const updatedEntry = await Entry.findByIdAndUpdate(req.params.id, {
+      $set: { rawDesc: req.body.text },
+    });
     if (updatedEntry) {
       res.status(200).json(updatedEntry);
     } else {
