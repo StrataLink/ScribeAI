@@ -7,7 +7,7 @@
 
 /* Assuming your Sidebar component has a class name 'sidebar' */
 .sidebar {
-  flex: 0 0 240px; /* Adjust width as needed, do not grow, do not shrink */
+  flex: 0 0 280px; /* Adjust width as needed, do not grow, do not shrink */
   background-color: #2c2c6e; /* Sidebar background color */
   color: white;
   /* Add other styles from Sidebar.css */
@@ -22,11 +22,38 @@
 }
 
 /* Styles for the user display at the bottom of the sidebar, if needed */
+
 .user-display {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #2c3e50; 
+  color: #ecf0f1; 
+  border-radius: 5px; 
   position: absolute;
   bottom: 0;
-  width: 100%;
-  /* Style it as needed */
+  width: 19%;
 }
 
-/* Add additional styles as needed for buttons, text, etc. */
+.user-avatar {
+  width: 50px; 
+  height: 50px;
+  border-radius: 50%; 
+  overflow: hidden;
+  margin-right: 10px; 
+}
+
+.user-avatar img {
+  width: 100%;
+  height: auto; 
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  margin: 0;
+  font-size: 1.2em; 
+}
