@@ -1,41 +1,85 @@
+.login-main{
+  background-color: #010d8d;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(#0017e6, 30%, #bcc2ff);
+  opacity: 95%;
+  position: absolute;
+  font-family: Lato;
+  color: black;
+  }
+
+.user{
+  align-items: center;
+  text-align: center;
+  position: position;
+  display: flex;
+}
+
+.fa-user{
+  font-size: 30px;
+  position: relative;
+  background-color: rgba(48, 101, 45, 0.781);
+  padding: 10px;
+  color: white;
+  height: auto;
+  width: 30px;
+}
+
 .login-container {
-    max-width: 400px;
-    margin: 0 auto;
+    width: 450px;
+    height: 260px;
+    position: relative;
+    margin-top: 130px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    border-radius: 20px;
+    background-color: white;
+    opacity: 80%
+   /* background-color: rgba(255, 255, 255, 0.553);
+     background-image: url("../images/background2.png");
+    box-shadow: 0px 10px 50px 40px rgba(74, 197, 148, 0.409);*/
   }
   
   .login-container h2 {
-    margin-bottom: 20px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-size: 30px;
   }
   
-  .form-group {
+  .form-groupL label {
+    display: block;
+  }
+  
+  .form-groupL input {
+    width: 234%;
+    height: 40px;
+    border:none;
+    color: black;
+    font-size: 15px;
+    padding: 5px;
+    background-color: #91d3afb8;
+  }
+  .spaceL{
     margin-bottom: 15px;
   }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  button[type="submit"] {
+
+  .buttL {
     display: block;
     width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
+    padding: 15px;
+    color: rgba(68, 41, 165, 0.8);
     border-radius: 5px;
     cursor: pointer;
   }
   
+  .fa-lock{
+    font-size: 30px;
+    position: relative;
+    background-color: rgba(48, 101, 45, 0.781);
+    padding: 10px;
+    color: white;
+    height: auto;
+    width: 30px;
+  }
