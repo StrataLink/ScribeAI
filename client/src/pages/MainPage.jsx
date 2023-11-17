@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import { apiURL } from "../utils/URL";
 import "./MainPage.css";
 import Sidebar from "../components/Sidebar";
+import Entry from "../components/Entry";
 
 const MainPage = (props) => {
   // Use state variables: fill empty with separate components.
@@ -16,6 +17,7 @@ const MainPage = (props) => {
   const [entries, setEntries] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { entryCode } = useParams();
 
   const populateUserInfo = async () => {
     try {
@@ -31,7 +33,7 @@ const MainPage = (props) => {
       if (response.status != 200) {
         throw new Error("Not logged in.");
       } else {
-        setUser(response.data.user);
+        setUser(response.data.user.name);
         await fetchEntries();
       }
     } catch (e) {
@@ -46,13 +48,20 @@ const MainPage = (props) => {
 
   const fetchEntries = async () => {
     try {
-      const response = await axios.get(`${apiURL}/api/entry/get-entries`, {
-        withCredentials: true,
-      });
-      setEntries(response.data.data);
+      const response = await fetch(
+        "http://localhost:3001/api/entry/get-entries",
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
+      const data = await response.json();
+      setEntries(data.data);
       setLoading(false);
-    } catch (e) {
-      console.error("Frontend error fetching entries. Error Message:", e);
+    } catch (error) {
+      console.error("Frontend error fetching entries. Error Message:", error);
     }
   };
 
@@ -60,23 +69,33 @@ const MainPage = (props) => {
     populateUserInfo();
   }, []);
 
-    const createEntry = async (userRef) => {
-      // mongo logic - add new entry to collection: entries in DB.
-      // database forEach loop will handle CSS/frontend display - medium
-      try {
-        const response = await axios.post(`${apiURL}/api/entry/add-entry`, {
-            user: userRef,
-            title: "Untitled Entry" // todo, make alliteration later?
-        });
-        setEntries(prevEntries => [...prevEntries, response.data.data]); // need to sort in map based on last updated?
-      }
-      catch (e) {
-        console.error("Failed to create a new entry. Error Message:", e);
-      }
-    };
+  const createEntry = async () => {
+    // mongo logic - add new entry to collection: entries in DB.
+    // database forEach loop will handle CSS/frontend display - medium
+    try {
+      const response = await fetch(
+        "http://localhost:3001/api/entry/add-entry",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            title: "Untitled Title",
+          }),
+        }
+      );
+      const data = await response.json();
+      setEntries((prevEntries) => [...prevEntries, data.data]); // need to sort in map based on last updated?
+      navigate(`/main/${data.data._id}`);
+    } catch (e) {
+      console.error("Failed to create a new entry. Error Message:", e);
+    }
+  };
 
   /* handleSideBar function is on-hold until further notice, to be done in Sidebar component. */
-  
+
   // archaic function decl. Jason's task.
   const handleEntry = () => {
     // change entryView useState variable - easy.
@@ -85,12 +104,12 @@ const MainPage = (props) => {
   const handleBookMark = () => {
     // mongo logic - add boolean to entry so star shows up (important) - easy
   };
-  
+
   // Jason.
   const handleRecord = () => {
     // logic - check live boolean, based on that to preprocessing - then display on frontend, main text - hard
   };
-  
+
   // Jason.
   const handleLiveRecording = () => {
     // switch boolean to true if false, easy.
@@ -100,7 +119,7 @@ const MainPage = (props) => {
   const handleVideoRecording = () => {
     // switch boolean to false if true, easy.
   };
-  
+
   // on-hold.
   const handleToolTip = () => {
     // change tooltip boolean, show tooltip in middle of the screen. (disable tooltip when display div.), easy
@@ -117,11 +136,15 @@ const MainPage = (props) => {
         <div>Loading...</div>
       ) : (
         <div className="main-wrapper">
-          {/* add sidebar component -> map individual entries with changeable names. */}
-          {console.log(entries)}
-          <Sidebar entries={entries} createFunc={() => createEntry(user)} profileFunc={() => handleProfile(user)}  />
-          {/* add entryview component */}
-          {/* add sub, color, profile, and tooltip view here. */}
+          <Sidebar
+            entries={entries}
+            setEntries={setEntries}
+            createFunc={() => createEntry()}
+            profileFunc={() => handleProfile(user)}
+          />
+          <Entry setEntries={setEntries} entryCode={entryCode} />
+          {/* Assuming you have a user display component */}
+          <div className="user-display">{user}</div>
         </div>
       )}
     </>

@@ -1,0 +1,32 @@
+.main-wrapper {
+  display: flex;
+  flex-direction: row; /* Sidebar on the left, entry on the right */
+  height: 100vh; /* Full viewport height */
+  background-color: #1e1e52; /* Adjust the color to match your design */
+}
+
+/* Assuming your Sidebar component has a class name 'sidebar' */
+.sidebar {
+  flex: 0 0 240px; /* Adjust width as needed, do not grow, do not shrink */
+  background-color: #2c2c6e; /* Sidebar background color */
+  color: white;
+  /* Add other styles from Sidebar.css */
+}
+
+/* Entry component styles, adjust as per your Entry component's class names */
+.entry-component {
+  flex-grow: 1; /* Entry takes up the remaining space */
+  background-color: #1e1e52; /* Entry background color, adjust as needed */
+  color: white;
+  /* Add other styles for the entry component */
+}
+
+/* Styles for the user display at the bottom of the sidebar, if needed */
+.user-display {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Style it as needed */
+}
+
+/* Add additional styles as needed for buttons, text, etc. */

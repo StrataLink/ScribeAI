@@ -1,0 +1,75 @@
+.entry-container {
+  font-family: "Arial", sans-serif;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.title {
+  color: #4a4a4a;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.buttonRow {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.scribeButton,
+.aiButton {
+  background-color: #6f52ed;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.scribeButton:hover,
+.aiButton:hover {
+  background-color: #5a41cc;
+}
+
+.textContent {
+  background-color: #f3f3f3;
+  border-left: 4px solid #6f52ed;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.recordingSection {
+  text-align: center;
+}
+
+.recordLabel {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.recordButton {
+  background-color: #ff686b;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.recordButton img {
+  width: 20px;
+  height: 20px;
+}
+
+.recordButton:hover {
+  background-color: #e55a5e;
+}
+
+.recordButton.stop {
+  background-color: #ff686b;
+}
+
+.recordButton.stop:hover {
+  background-color: #e55a5e;
+}
