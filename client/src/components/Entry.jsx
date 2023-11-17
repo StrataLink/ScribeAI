@@ -22,7 +22,7 @@ const Entry = ({ setEntries, entryCode }) => {
 
   useEffect(() => {
     getEntryData();
-  }, []);
+  }, [entryCode]); // Add entryCode as a dependency
 
   const getEntryData = async () => {
     if (entryCode) {
