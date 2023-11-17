@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/add-entry", async (req, res) => {
   try {
     const newEntry = await Entry.create({
-      user: req.body.user,
+      user: req.user.id,
       title: req.body.title, // todo, make this alliteration.
       rawDesc: "",
       summarizedDesc: "",
@@ -23,7 +23,7 @@ router.post("/add-entry", async (req, res) => {
 
 router.get("/get-entries", async (req, res) => {
   try {
-    const all = await Entry.find();
+    const all = await Entry.find({ user: req.user.id });
     const response = {
       message: "Successful got all entries",
       data: all,

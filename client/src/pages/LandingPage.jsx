@@ -1,21 +1,21 @@
-import React, { useRef } from "react"
-import "./LandingPage.css"
-import { useNavigate } from "react-router-dom"
-import Navbar from "../components/Navbar"
-import Laptop from "../images/Laptop.svg"
+import React, { useRef } from "react";
+import "./LandingPage.css";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Laptop from "../images/Laptop.svg";
 
 function LandingPage() {
-  const intro = useRef(null)
-  const about = useRef(null)
-  const pricing = useRef(null)
+  const intro = useRef(null);
+  const about = useRef(null);
+  const pricing = useRef(null);
 
-  const scroll = id => {
-    const targetE = document.getElementById(id)
+  const scroll = (id) => {
+    const targetE = document.getElementById(id);
     if (targetE) {
-      targetE.scrollIntoView({ behavior: "smooth" })
+      targetE.scrollIntoView({ behavior: "smooth" });
     }
-  }
-  const navigate = useNavigate()
+  };
+  const navigate = useNavigate();
   /*const Laptop = require("../../public/Laptop.svg") as string;*/
   return (
     <div className="landing-container">
@@ -37,7 +37,7 @@ function LandingPage() {
         <div className="shadow"></div>
       </header>
       <section>
-        <button className="cta-button" onClick={() => navigate("/login")}>
+        <button className="cta-button" onClick={() => navigate("/main")}>
           Get Started
         </button>
 
@@ -196,7 +196,7 @@ function LandingPage() {
         </button>
       </section>
     </div>
-  )
+  );
 }
 
-export default LandingPage
+export default LandingPage;

@@ -48,13 +48,20 @@ const MainPage = (props) => {
 
   const fetchEntries = async () => {
     try {
-      const response = await axios.get(`${apiURL}/api/entry/get-entries`, {
-        withCredentials: true,
-      });
-      setEntries(response.data.data);
+      const response = await fetch(
+        "http://localhost:3001/api/entry/get-entries",
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
+      const data = await response.json();
+      setEntries(data.data);
       setLoading(false);
-    } catch (e) {
-      console.error("Frontend error fetching entries. Error Message:", e);
+    } catch (error) {
+      console.error("Frontend error fetching entries. Error Message:", error);
     }
   };
 
