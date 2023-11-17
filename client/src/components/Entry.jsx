@@ -3,6 +3,8 @@ import { io } from "socket.io-client";
 import "./Entry.css";
 import microphoneIcon from "../images/microphoneIcon.png";
 import stopIcon from "../images/stopRecording.png"; // make sure to add an icon for stopping the recording
+import ScribeIcon from "../images/ScribeIcon.png";
+import BrainIcon from "../images/BrainIcon.png";
 
 const Entry = ({ setEntries, entryCode }) => {
   const [initial, setInitial] = useState(true);
@@ -11,6 +13,7 @@ const Entry = ({ setEntries, entryCode }) => {
   const textRef = useRef(""); // useRef to keep track of the current text without causing re-renders
   const [socket, setSocket] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
+  const [activeButton, setActiveButton] = useState('Scribe');
   const intervalRef = useRef(null);
 
   useEffect(() => {
@@ -142,30 +145,52 @@ const Entry = ({ setEntries, entryCode }) => {
     setIsRecording(false);
   };
 
+  const handleTextChange = (event) => {
+    setText(event.target.value);
+  };
+
   return (
     <div className="entry-container">
       <h1 className="title">{title}</h1>
       <div className="buttonRow">
-        <button className="scribeButton">Scribe</button>
-        <button className="aiButton">AI</button>
-      </div>
-      <div className="textContent">{text}</div>
-      <div className="recordingSection">
-        <div className="recordLabel">
-          {isRecording ? "Stop Recording" : "Record"}
+        <div className={`toggleWrapper ${activeButton === 'Scribe' ? 'scribeActive' : 'aiActive'}`}>
+          <button className="scribeButton" onClick={() => setActiveButton('Scribe')}>
+            <img src={ScribeIcon} alt="Scribe" className="buttonIcon" />
+            <span>Scribe</span>
+          </button>
+          <button className="aiButton" onClick={() => setActiveButton('AI')}>
+            <img src={BrainIcon} alt="AI" className="buttonIcon" />
+            <span>AI</span>
+          </button>
         </div>
-        <button
-          className={`recordButton ${isRecording ? "stop" : ""}`}
-          onClick={isRecording ? stopRecording : startRecording}
-        >
-          <img
-            src={isRecording ? stopIcon : microphoneIcon}
-            alt={isRecording ? "Stop" : "Record"}
-          />
-        </button>
       </div>
+      {activeButton === 'Scribe' ? (
+        <>
+          <textarea
+            className="textContent"
+            value={text}
+            onChange={handleTextChange}
+          />
+          <div className="recordingSection">
+            <button
+              className={`recordButton ${isRecording ? "stop" : ""}`}
+              onClick={isRecording ? stopRecording : startRecording}
+            >
+              <span className="recordText">{isRecording ? "Stop" : "Record"}</span>
+              <div className="Space"></div>
+              <img
+                className="recordIcon"
+                src={isRecording ? stopIcon : microphoneIcon}
+                alt={isRecording ? "Stop" : "Record"}
+              />
+            </button>
+          </div>
+        </>
+      ) : (
+        <div className="textContent"></div> 
+      )}
     </div>
-  );
+  );  
 };
 
 export default Entry;

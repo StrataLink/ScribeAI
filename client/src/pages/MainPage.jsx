@@ -40,7 +40,7 @@ const MainPage = (props) => {
       if (e.message === "Not logged in.") {
         navigate("/login");
       } else {
-        console.error("An rror occurred.");
+        console.error("An Error occurred.");
         navigate("/");
       }
     }
