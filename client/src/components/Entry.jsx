@@ -21,7 +21,13 @@ const Entry = ({ setEntries, entryCode }) => {
   }, []);
 
   useEffect(() => {
-    getEntryData();
+    if (entryCode) {
+      getEntryData();
+    } else {
+      setInitial(true);
+      setTitle("Untitled");
+      setText("Start");
+    }
   }, [entryCode]); // Add entryCode as a dependency
 
   const getEntryData = async () => {
@@ -97,7 +103,7 @@ const Entry = ({ setEntries, entryCode }) => {
   };
 
   useEffect(() => {
-    if (text !== "") {
+    if (text !== "" && entryCode) {
       handleUpdate();
     }
   }, [text]);
