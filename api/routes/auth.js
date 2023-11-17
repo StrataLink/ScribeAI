@@ -44,17 +44,32 @@ router.post("/login", async (req, res) => {
 router.post("/register", async (req, res) => {
   try {
     const newPassword = await bcryptjs.hash(req.body.password, 10);
-    const user = await User.create({
+    await User.create({
       name: req.body.name,
       email: req.body.email,
       password: newPassword,
     });
-    res.status(200).json({ message: "Successful registration." , userId: user._id});
+    res.status(200).json({ message: "Successful registration." });
   } catch (e) {
     console.error(e);
     res.status(401).json({ error: "Failed registration." });
   }
 });
+
+router.get("/profile", async(req, res) => {
+  if (!req.user) {
+    return res.status(500).json({ error: "Cannot find a user." });
+  }
+  try{ 
+    const user = await User.findOne({
+    email: req.user.email,
+    })
+    res.status(200).json({message: "Found user.", user: user})
+  }
+  catch (e) {
+    res.status(404).json({error: "Cannot find a user associated with this email."});
+  }
+})
 
 // Logout Endpoint
 router.get("/logout", async (req, res) => {
