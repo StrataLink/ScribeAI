@@ -1,8 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { FaPlus } from 'react-icons/fa';
+import { FaChevronLeft } from "react-icons/fa";
 import "./Sidebar.css";
 
-const Sidebar = ({ entries, setEntries, createFunc, deleteFunc }) => {
+const Sidebar = ({ entries, setEntries, createFunc, deleteFunc, user  }) => {
   const navigate = useNavigate();
 
   const handleOnClick = async (entryCode) => {
@@ -38,9 +40,9 @@ const Sidebar = ({ entries, setEntries, createFunc, deleteFunc }) => {
     <div className="sidebar">
       <div className="sidebar-top">
         <button className="create-button" onClick={createFunc}>
-          +
+          <FaPlus/> Create
         </button>
-        <div className="placeholder-div"></div>
+        <div className="placeholder-div"><FaChevronLeft/></div>
       </div>
       <div className="entries">
         {entries.map((entry) => (
@@ -59,6 +61,14 @@ const Sidebar = ({ entries, setEntries, createFunc, deleteFunc }) => {
           </div>
         ))}
       </div>
+      <div className="user-display">
+          <div className="user-avatar">
+            <img src="/path-to-avatar-image.jpg" alt="User Avatar" />
+          </div>
+          <div className="user-info">
+            <h3 className="user-name">{user}</h3>
+          </div>
+        </div>
     </div>
   );
 };

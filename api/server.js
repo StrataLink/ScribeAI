@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const allRoutes = require("./routes/index.js");
 const cookieParser = require("cookie-parser");
+const { PythonShell } = require('python-shell');
 
 require("dotenv").config();
 /*
@@ -22,6 +23,32 @@ app.use("/uploads", express.static("uploads"));
 
 // Routes
 app.use("/api", allRoutes);
+app.post('/api/summarize/summarize', (req, res) => {
+  // Extract the text to be summarized from the request body
+  const { text } = req.body;
+  
+  // Spawn the Python process
+  const pythonProcess = spawn('python', ['./utils/summarize.py', text]);
+
+  // Collect data from script
+  let scriptOutput = '';
+  pythonProcess.stdout.on('data', (data) => {
+    scriptOutput += data.toString();
+  });
+
+  // Collect error from script if any
+  pythonProcess.stderr.on('data', (data) => {
+    console.error(`stderr: ${data.toString()}`);
+  });
+
+  // Handle script completion
+  pythonProcess.on('close', (code) => {
+    if (code !== 0) {
+      return res.status(500).json({ message: 'Summarization failed' });
+    }
+    res.json({ summarizedText: scriptOutput });
+  });
+});
 /* Whenever we want to access the backend through
    the frontend use this endpoint format: 
    "/api/<model>/<typeofReuqest, ex: getallTasks>"

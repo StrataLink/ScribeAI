@@ -1,31 +1,46 @@
 .entry-container {
   font-family: "Arial", sans-serif;
-  max-width: 800px;
-  margin: auto;
+  width: 60%;
+  margin: 0px auto;
   padding: 20px;
+  border-radius: 10px;
+  background-color: #1e1e52;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .title {
-  color: #4a4a4a;
+  color: white;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom:40px;
+  font-size: 24px;
 }
 
 .buttonRow {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+}
+
+.toggleWrapper {
+  display: flex;
+  border-radius: 8px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
 .scribeButton,
 .aiButton {
   background-color: #6f52ed;
-  color: white;
+  color: black;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .scribeButton:hover,
@@ -33,15 +48,61 @@
   background-color: #5a41cc;
 }
 
+.buttonIcon {
+  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+}
+
+.toggleWrapper.scribeActive .scribeButton,
+.toggleWrapper.aiActive .aiButton {
+  background: #F7C3FF;
+  color: black;
+  box-shadow: none;
+  text-decoration: underline;
+}
+
+.toggleWrapper.scribeActive .aiButton,
+.toggleWrapper.aiActive .scribeButton {
+  background: #C770FD;
+  color: black;
+  box-shadow: none;
+}
+
 .textContent {
   background-color: #f3f3f3;
-  border-left: 4px solid #6f52ed;
-  padding: 20px;
+  border: none;
+  padding: 50px;
   margin-bottom: 20px;
+  width: 100%;
+  height: 60%;
+  box-sizing: border-box;
+  resize: none;
+  font-family: Inter;
+  font-size: 24px;
+  line-height: 1.6;
+  color: #333;
+  border-radius: 10px;
+}
+
+.textContent:focus {
+  border-color: #6f52ed;
+  background-color: white;
+}
+
+.textContent::placeholder {
+  color: #aaa;
+}
+
+.textContent[disabled] {
+  background-color: #ebebeb;
+  color: #999;
+  cursor: not-allowed;
 }
 
 .recordingSection {
   text-align: center;
+  margin-top: 20px;
 }
 
 .recordLabel {
@@ -49,21 +110,46 @@
   margin-bottom: 10px;
 }
 
-.recordButton {
-  background-color: #ff686b;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.recordingSection {
+  text-align: center;
+  margin-top: 30px;
 }
 
-.recordButton img {
-  width: 20px;
-  height: 20px;
+.Space{
+  margin-right: 20px;
+}
+
+.recordButton {
+  background-color: #ffffff;
+  color: #000000;
+  border: 2px solid #000000;
+  border-radius: 50px; 
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center; 
+  box-shadow: none;
+  width: 20%;
+}
+
+.recordText {
+  margin-right: 10px; 
+}
+
+.recordIcon {
+  width: 24px; 
+  height: 24px;
 }
 
 .recordButton:hover {
   background-color: #e55a5e;
+  color: #ffffff;
+}
+
+.recordButton img {
+  filter: invert(0);
 }
 
 .recordButton.stop {
@@ -72,4 +158,17 @@
 
 .recordButton.stop:hover {
   background-color: #e55a5e;
+}
+
+
+@media (max-width: 768px) {
+  .entry-container {
+    width: 80%;
+    margin: 20px auto;
+  }
+
+  .textContent {
+    height: auto;
+    min-height: 150px;
+  }
 }

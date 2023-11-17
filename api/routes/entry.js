@@ -51,7 +51,7 @@ router.get("/:id", async (req, res) => {
 
 router.delete("/delete-entry/:id", async (req, res) => {
   try {
-    const entry = await Entry.findByIdAndRemove(req.params.id);
+    const entry = await Entry.findByIdAndDelete(req.params.id);
     if (entry) {
       res.status(200).json({ message: "Entry successfully deleted." });
     } else {

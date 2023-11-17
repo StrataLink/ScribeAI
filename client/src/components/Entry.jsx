@@ -2,15 +2,19 @@ import React, { useState, useEffect, useRef } from "react";
 import { io } from "socket.io-client";
 import "./Entry.css";
 import microphoneIcon from "../images/microphoneIcon.png";
-import stopIcon from "../images/stopRecording.png"; // make sure to add an icon for stopping the recording
+import stopIcon from "../images/stopRecording.png"; 
+import ScribeIcon from "../images/ScribeIcon.png";
+import BrainIcon from "../images/BrainIcon.png";
 
 const Entry = ({ setEntries, entryCode }) => {
   const [initial, setInitial] = useState(true);
   const [title, setTitle] = useState("Untitled");
   const [text, setText] = useState("");
-  const textRef = useRef(""); // useRef to keep track of the current text without causing re-renders
+  const [summarizedText, setSText] = useState("");
+  const textRef = useRef(""); 
   const [socket, setSocket] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
+  const [activeButton, setActiveButton] = useState('Scribe');
   const intervalRef = useRef(null);
 
   useEffect(() => {
@@ -29,6 +33,10 @@ const Entry = ({ setEntries, entryCode }) => {
       setText("Start");
     }
   }, [entryCode]); // Add entryCode as a dependency
+
+  useEffect(() => {
+    console.log('Summarized text updated:', summarizedText);
+  }, [summarizedText]);
 
   const getEntryData = async () => {
     if (entryCode) {
@@ -69,7 +77,7 @@ const Entry = ({ setEntries, entryCode }) => {
       const data = await res.json();
       console.log(data);
     } catch (error) {
-      // Handle error (e.g., show error message, log the error, etc.)
+     
       console.error("Error getting room:", error);
     }
   };
@@ -98,9 +106,47 @@ const Entry = ({ setEntries, entryCode }) => {
       });
   };
 
+  const submitTextForSummarization = async () => {
+    console.log('Initiating summarization for text:', text); // Log the text being sent
+    try {
+      console.log('Making fetch call to the server'); // Log before fetch call
+      const response = await fetch(`http://localhost:3001/api/summarize/summarize`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: text }),
+      });
+  
+      console.log('Fetch call completed'); // Log after fetch call
+      console.log('Response received', response); // Log the response object
+      if (!response.ok) {
+        console.error('Response not ok, status:', response.status); // Log non-OK status
+        throw new Error(`Network response was not ok, status code: ${response.status}`);
+      }
+  
+      console.log('Attempting to parse response JSON'); // Log before parsing JSON
+      const result = await response.json();
+      console.log('Result:', result); // Log the result
+      setSText(result.summarizedText);
+    } catch (error) {
+      console.error('Error during summarization:', error);
+      // Attempt to log the error more thoroughly
+      if (error instanceof Error) {
+        console.error('Error details:', error.message);
+      }
+    }
+  };
+  
+
+  const handleAIButtonClick = () => {
+    setActiveButton('AI'); 
+    submitTextForSummarization(); 
+  };
+
   const appendText = (newData) => {
-    textRef.current += newData; // Append new data to the current text
-    setText(textRef.current); // Update state to re-render and show the new text
+    textRef.current += newData; 
+    setText(textRef.current);
   };
 
   useEffect(() => {
@@ -142,30 +188,56 @@ const Entry = ({ setEntries, entryCode }) => {
     setIsRecording(false);
   };
 
+  const handleTextChange = (event) => {
+    setText(event.target.value);
+  };
+
   return (
     <div className="entry-container">
       <h1 className="title">{title}</h1>
       <div className="buttonRow">
-        <button className="scribeButton">Scribe</button>
-        <button className="aiButton">AI</button>
-      </div>
-      <div className="textContent">{text}</div>
-      <div className="recordingSection">
-        <div className="recordLabel">
-          {isRecording ? "Stop Recording" : "Record"}
+        <div className={`toggleWrapper ${activeButton === 'Scribe' ? 'scribeActive' : 'aiActive'}`}>
+          <button className="scribeButton" onClick={() => setActiveButton('Scribe')}>
+            <img src={ScribeIcon} alt="Scribe" className="buttonIcon" />
+            <span>Scribe</span>
+          </button>
+          <button className="aiButton" onClick={handleAIButtonClick}>
+            <img src={BrainIcon} alt="AI" className="buttonIcon" />
+            <span>AI</span>
+          </button>
         </div>
-        <button
-          className={`recordButton ${isRecording ? "stop" : ""}`}
-          onClick={isRecording ? stopRecording : startRecording}
-        >
-          <img
-            src={isRecording ? stopIcon : microphoneIcon}
-            alt={isRecording ? "Stop" : "Record"}
-          />
-        </button>
       </div>
+      {activeButton === 'Scribe' ? (
+        <>
+          <textarea
+            className="textContent"
+            value={text}
+            onChange={handleTextChange}
+          />
+          <div className="recordingSection">
+            <button
+              className={`recordButton ${isRecording ? "stop" : ""}`}
+              onClick={isRecording ? stopRecording : startRecording}
+            >
+              <span className="recordText">{isRecording ? "Stop" : "Record"}</span>
+              <div className="Space"></div>
+              <img
+                className="recordIcon"
+                src={isRecording ? stopIcon : microphoneIcon}
+                alt={isRecording ? "Stop" : "Record"}
+              />
+            </button>
+          </div>
+        </>
+      ) : (
+        <textarea
+            className="textContent"
+            value={summarizedText}
+            readOnly
+          />
+      )}
     </div>
-  );
+  );  
 };
 
 export default Entry;

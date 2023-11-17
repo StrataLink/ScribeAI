@@ -40,7 +40,7 @@ const MainPage = (props) => {
       if (e.message === "Not logged in.") {
         navigate("/login");
       } else {
-        console.error("An rror occurred.");
+        console.error("An Error occurred.");
         navigate("/");
       }
     }
@@ -141,10 +141,11 @@ const MainPage = (props) => {
             setEntries={setEntries}
             createFunc={() => createEntry()}
             profileFunc={() => handleProfile(user)}
+            user = {user}
           />
+
           <Entry setEntries={setEntries} entryCode={entryCode} />
           {/* Assuming you have a user display component */}
-          <div className="user-display">{user}</div>
         </div>
       )}
     </>
