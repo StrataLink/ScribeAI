@@ -26,14 +26,10 @@ def main(input_text):
 
     try:
         summary = summarize_text(input_text, model, tokenizer)
-        summary_with_corrections = correct_grammar(summary)
-        print(summary_with_corrections)
+        print(summary)
     except Exception as e:
         logging.error(f'An error occurred during summarization: {e}')
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        input_text = sys.argv[1]
-    else:
-        input_text = ("")
+    input_text = sys.argv[1]
     main(input_text)

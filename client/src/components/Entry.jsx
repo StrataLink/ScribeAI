@@ -34,6 +34,10 @@ const Entry = ({ setEntries, entryCode }) => {
     }
   }, [entryCode]); // Add entryCode as a dependency
 
+  useEffect(() => {
+    console.log('Summarized text updated:', summarizedText);
+  }, [summarizedText]);
+
   const getEntryData = async () => {
     if (entryCode) {
       try {
@@ -103,7 +107,9 @@ const Entry = ({ setEntries, entryCode }) => {
   };
 
   const submitTextForSummarization = async () => {
+    console.log('Initiating summarization for text:', text); // Log the text being sent
     try {
+      console.log('Making fetch call to the server'); // Log before fetch call
       const response = await fetch(`http://localhost:3001/api/summarize/summarize`, {
         method: 'POST',
         headers: {
@@ -112,20 +118,30 @@ const Entry = ({ setEntries, entryCode }) => {
         body: JSON.stringify({ text: text }),
       });
   
+      console.log('Fetch call completed'); // Log after fetch call
+      console.log('Response received', response); // Log the response object
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        console.error('Response not ok, status:', response.status); // Log non-OK status
+        throw new Error(`Network response was not ok, status code: ${response.status}`);
       }
   
+      console.log('Attempting to parse response JSON'); // Log before parsing JSON
       const result = await response.json();
+      console.log('Result:', result); // Log the result
       setSText(result.summarizedText);
     } catch (error) {
       console.error('Error during summarization:', error);
+      // Attempt to log the error more thoroughly
+      if (error instanceof Error) {
+        console.error('Error details:', error.message);
+      }
     }
   };
+  
 
   const handleAIButtonClick = () => {
-    setActiveButton('AI'); // Set active button to 'AI'
-    submitTextForSummarization(); // Call the summarization function
+    setActiveButton('AI'); 
+    submitTextForSummarization(); 
   };
 
   const appendText = (newData) => {
@@ -217,6 +233,7 @@ const Entry = ({ setEntries, entryCode }) => {
         <textarea
             className="textContent"
             value={summarizedText}
+            readOnly
           />
       )}
     </div>
