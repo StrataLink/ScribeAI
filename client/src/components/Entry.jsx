@@ -45,7 +45,8 @@ const Entry = ({ setEntries, entryCode }) => {
         const data = await response.json();
         setInitial(false);
         setTitle(data.title);
-        setText(data.rawDesc);
+        textRef.current = data.rawDesc;
+        setText(textRef.current);
       } catch (error) {
         console.log(error);
       }
