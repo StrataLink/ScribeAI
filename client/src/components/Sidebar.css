@@ -1,0 +1,45 @@
+.sidebar {
+  background-color: #2c2c6e;
+  color: white;
+  width: 200px; /* Adjust width as per design */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.sidebar-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.create-button {
+  background-color: #7c53a5;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.placeholder-div {
+  width: 24px; /* Placeholder for the search icon */
+  height: 24px;
+  background-color: #7c53a5; /* Placeholder color */
+}
+
+.entries {
+  display: flex;
+  flex-direction: column;
+}
+
+.entry {
+  background-color: #3e3e89;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.entry-title {
+  font-size: 14px; /* Adjust as per design */
+}
