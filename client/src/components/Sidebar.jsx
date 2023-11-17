@@ -27,6 +27,7 @@ const Sidebar = ({ entries, setEntries, createFunc, deleteFunc }) => {
         updatedItems.splice(indexToDelete, 1);
         setEntries(updatedItems);
       }
+      navigate("/main");
     } catch (error) {
       // Handle error (e.g., show error message, log the error, etc.)
       console.error("Error deleting room:", error);
