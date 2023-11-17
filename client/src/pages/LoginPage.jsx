@@ -67,9 +67,10 @@ function LoginPage() {
             </div>
           </div>
           <div className="spaceL"></div>
-          <button className="buttL" type="submit" onClick={() => navigate("/main")}>
+          <button className="buttL" type="submit">
             Login
           </button>
+          
         </form>
       </div>
     </div>
