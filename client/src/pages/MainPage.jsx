@@ -138,6 +138,7 @@ const MainPage = (props) => {
         <div className="main-wrapper">
           <Sidebar
             entries={entries}
+            setEntries={setEntries}
             createFunc={() => createEntry()}
             profileFunc={() => handleProfile(user)}
           />

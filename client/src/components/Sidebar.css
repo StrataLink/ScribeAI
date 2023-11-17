@@ -33,7 +33,23 @@
   flex-direction: column;
 }
 
+.delete-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 20px; /* Adjust as per design */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+/* Positioning the delete button inside the entry */
 .entry {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: #3e3e89;
   margin-bottom: 10px;
   padding: 10px;
@@ -41,5 +57,6 @@
 }
 
 .entry-title {
-  font-size: 14px; /* Adjust as per design */
+  flex-grow: 1;
+  /* Add other styles */
 }
