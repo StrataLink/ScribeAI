@@ -3,12 +3,13 @@
   width: 100%;
   height: 100vh;
   background: linear-gradient(#bcc2ff, 30%, #0017e6);
+  opacity: 95%;
   position: absolute;
   font-family: Lato;
 }
 
 .register-container {
-    max-width: 500px;
+    max-width: 450px;
     position: relative;
     margin-top: 100px;
     margin-left: auto;
@@ -18,6 +19,7 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
+    opacity: 80%;
   }
   
   .register-container h2 {
@@ -25,6 +27,32 @@
     text-align: center;
   }
   
+  .userR{
+    align-items: center;
+    text-align: center;
+    position: position;
+    display: flex;
+  }
+
+  .fa-envelope{
+    font-size: 30px;
+    position: relative;
+    background-color: rgba(48, 101, 45, 0.781);
+    padding: 10px;
+    color: white;
+    height: auto;
+    width: 30px;
+  }
+
+  .fa-unlock-alt{
+    font-size: 30px;
+    position: relative;
+    background-color: rgba(48, 101, 45, 0.781);
+    padding: 10px;
+    color: white;
+    height: auto;
+    width: 30px;
+  }
   .form-groupR {
     margin-bottom: 15px;
   }
@@ -35,20 +63,27 @@
   }
   
   .form-groupR input {
-    width: 95%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    margin-top: 15px;
+    width: 234%;
+    height: 40px;
+    border:none;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    padding: 5px;
+    background-color: #91d3afb8;
   }
   
   button[type="submit"] {
     display: block;
-    width: 100%;
+    width: 60%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #1e2bdd;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
   }
   

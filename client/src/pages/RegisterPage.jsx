@@ -18,32 +18,41 @@ function RegisterPage() {
     <div className="register-container">
       <h2>Register</h2>
       <form onSubmit={handleRegister}>
+        <div className="userR">
+          <i className="fa fa-envelope"></i>         
         <div className="form-groupR">
-          <label>Email:</label>
           <input
             type="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
+            placeholder="Email"
           />
         </div>
+        </div>
+        <div className="userR">
+          <i className="fa fa fa-unlock-alt"></i>
         <div className="form-groupR">
-          <label>Password:</label>
           <input
             type="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
             required
+            placeholder="Password"
           />
         </div>
+        </div>
+        <div className="userR">
+          <i className="fa fa-lock"></i>
         <div className="form-groupR">
-          <label>Confirm Password:</label>
           <input
             type="password"
             value={confirmPassword}
             onChange={e => setConfirmPassword(e.target.value)}
             required
+            placeholder="Confirm Password"
           />
+        </div>
         </div>
         <button type="submit" onClick={() => navigate("/login")}>
           Register
