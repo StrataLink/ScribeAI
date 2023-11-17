@@ -54,7 +54,6 @@
   height: 20px;
 }
 
-/* Active state styles */
 .toggleWrapper.scribeActive .scribeButton,
 .toggleWrapper.aiActive .aiButton {
   background: #F7C3FF;
@@ -63,7 +62,6 @@
   text-decoration: underline;
 }
 
-/* Inactive state styles */
 .toggleWrapper.scribeActive .aiButton,
 .toggleWrapper.aiActive .scribeButton {
   background: #C770FD;

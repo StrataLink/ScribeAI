@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { io } from "socket.io-client";
 import "./Entry.css";
 import microphoneIcon from "../images/microphoneIcon.png";
-import stopIcon from "../images/stopRecording.png"; // make sure to add an icon for stopping the recording
+import stopIcon from "../images/stopRecording.png"; 
 import ScribeIcon from "../images/ScribeIcon.png";
 import BrainIcon from "../images/BrainIcon.png";
 
@@ -10,7 +10,8 @@ const Entry = ({ setEntries, entryCode }) => {
   const [initial, setInitial] = useState(true);
   const [title, setTitle] = useState("Untitled");
   const [text, setText] = useState("");
-  const textRef = useRef(""); // useRef to keep track of the current text without causing re-renders
+  const [summarizedText, setSText] = useState("");
+  const textRef = useRef(""); 
   const [socket, setSocket] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
   const [activeButton, setActiveButton] = useState('Scribe');
@@ -72,7 +73,7 @@ const Entry = ({ setEntries, entryCode }) => {
       const data = await res.json();
       console.log(data);
     } catch (error) {
-      // Handle error (e.g., show error message, log the error, etc.)
+     
       console.error("Error getting room:", error);
     }
   };
@@ -101,9 +102,35 @@ const Entry = ({ setEntries, entryCode }) => {
       });
   };
 
+  const submitTextForSummarization = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/summarize/summarize`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: text }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const result = await response.json();
+      setSText(result.summarizedText);
+    } catch (error) {
+      console.error('Error during summarization:', error);
+    }
+  };
+
+  const handleAIButtonClick = () => {
+    setActiveButton('AI'); // Set active button to 'AI'
+    submitTextForSummarization(); // Call the summarization function
+  };
+
   const appendText = (newData) => {
-    textRef.current += newData; // Append new data to the current text
-    setText(textRef.current); // Update state to re-render and show the new text
+    textRef.current += newData; 
+    setText(textRef.current);
   };
 
   useEffect(() => {
@@ -158,7 +185,7 @@ const Entry = ({ setEntries, entryCode }) => {
             <img src={ScribeIcon} alt="Scribe" className="buttonIcon" />
             <span>Scribe</span>
           </button>
-          <button className="aiButton" onClick={() => setActiveButton('AI')}>
+          <button className="aiButton" onClick={handleAIButtonClick}>
             <img src={BrainIcon} alt="AI" className="buttonIcon" />
             <span>AI</span>
           </button>
@@ -187,7 +214,10 @@ const Entry = ({ setEntries, entryCode }) => {
           </div>
         </>
       ) : (
-        <div className="textContent"></div> 
+        <textarea
+            className="textContent"
+            value={summarizedText}
+          />
       )}
     </div>
   );  
