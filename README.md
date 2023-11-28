@@ -1,6 +1,6 @@
 # ScribeAI
 
-### <pre> [Demo]() [Poster]() [Figma](https://www.figma.com/file/uRlyv0u3ywcwKSDXS3Q6Os/ScribeAI?type=design&node-id=0%3A1&mode=design&t=LeWEs396EQJZjmlN-1) [Frontend Architecture](https://github.com/StrataLink/ScribeAI/tree/main/client) [Backend Architecture](https://github.com/StrataLink/ScribeAI/tree/main/api)</pre>
+### <pre> [Demo]()   [Poster]()   [Figma](https://www.figma.com/file/uRlyv0u3ywcwKSDXS3Q6Os/ScribeAI?type=design&node-id=0%3A1&mode=design&t=LeWEs396EQJZjmlN-1)   [Frontend Architecture](https://github.com/StrataLink/ScribeAI/tree/main/client)   [Backend Architecture](https://github.com/StrataLink/ScribeAI/tree/main/api)</pre>
 
 ## Overview
 ScribeAI is an innovative full-stack web notes application designed to assist students. It uniquely combines speech-to-text capabilities with advanced generative summary AI, streamlining the note-taking process and enhancing learning efficiency.
