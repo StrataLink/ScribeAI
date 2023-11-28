@@ -39,7 +39,7 @@ npm start
 
 ## Contributors
 
-- Tashi Sherpa
+- Tashi Sherpa (Leader)
 - Ryan Cheng
 - Jason Chen
 - Rachel Tsui
