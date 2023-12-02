@@ -32,7 +32,6 @@ function LandingPage() {
           </p>
         </section>
         <img
-          style={{ width: 900, height: 900 }}
           src={Laptop}
           alt="imgLaptop"
           className="imgLaptop"
