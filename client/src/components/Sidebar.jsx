@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaPlus } from 'react-icons/fa';
 import { FaChevronLeft } from "react-icons/fa";
@@ -6,10 +6,15 @@ import "./Sidebar.css";
 
 const Sidebar = ({ entries, setEntries, createFunc, deleteFunc, user  }) => {
   const navigate = useNavigate();
+  const [sidebar, setSidebar] = useState(true);
 
   const handleOnClick = async (entryCode) => {
     navigate(`/main/${entryCode}`);
   };
+
+  const closeSidebar = () => {
+    sidebar ? setSidebar(false) : setSidebar(true);
+  }
 
   const handleDelete = async (entryId, e) => {
     e.stopPropagation(); // Prevent onClick event from firing when the delete button is clicked
@@ -37,39 +42,53 @@ const Sidebar = ({ entries, setEntries, createFunc, deleteFunc, user  }) => {
   };
 
   return (
-    <div className="sidebar">
-      <div className="sidebar-top">
-        <button className="create-button" onClick={createFunc}>
-          <FaPlus/> Create
-        </button>
-        <div className="placeholder-div"><FaChevronLeft/></div>
-      </div>
-      <div className="entries">
-        {entries.map((entry) => (
-          <div
-            key={entry._id}
-            className="entry"
-            onClick={() => handleOnClick(entry._id)}
-          >
-            <span className="entry-title">{entry.title}</span>
-            <button
-              className="delete-button"
-              onClick={(e) => handleDelete(entry._id, e)}
-            >
-              ×
+    <>
+      {sidebar ? (
+        <div className="sidebar">
+          <div className="sidebar-top">
+            <button className="create-button" onClick={createFunc}>
+              <FaPlus /> Create
+            </button>
+            <button className="sidebar-btn" onClick={closeSidebar}>
+              <FaChevronLeft />
             </button>
           </div>
-        ))}
-      </div>
-      <div className="user-display">
-          <div className="user-avatar">
-            <img src="/path-to-avatar-image.jpg" alt="User Avatar" />
+          <div className="entries">
+            {entries.map((entry) => (
+              <div
+                key={entry._id}
+                className="entry"
+                onClick={() => handleOnClick(entry._id)}
+              >
+                <span className="entry-title">{entry.title}</span>
+                <button
+                  className="delete-button"
+                  onClick={(e) => handleDelete(entry._id, e)}
+                >
+                  ×
+                </button>
+              </div>
+            ))}
           </div>
-          <div className="user-info">
-            <h3 className="user-name">{user}</h3>
+          <div className="user-display">
+            <div className="user-avatar">
+              <img src="/path-to-avatar-image.jpg" alt="User Avatar" />
+            </div>
+            <div className="user-info">
+              <h3 className="user-name">{user}</h3>
+            </div>
           </div>
         </div>
-    </div>
+      ) : (
+        <>
+          <button className="sidebar-btn" onClick={closeSidebar}>
+            <div className="placeholder-div">
+              <FaChevronLeft className="sidebar-logo-close" />
+            </div>
+          </button>
+        </>
+      )}
+    </>
   );
 };
 
