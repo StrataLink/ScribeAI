@@ -490,45 +490,45 @@
 
   .whbox1{
     background-color: rgb(255, 255, 255);
-    width: 320px;
-    height: 530px;
+    width: 300px;
+    height: 480px;
     position: relative;
-    margin-left: 100px;
+    margin-left: 80px;
     border-radius: 20px;
   }
   .whbox2{
     background-color: rgb(255, 255, 255);
-    width: 320px;
-    height: 530px;
+    width: 300px;
+    height: 480px;
     position: relative;
     border-radius: 20px;
 
   }
   .whbox3{
     background-color: rgb(255, 255, 255);
-    width: 320px;
-    height: 530px;
+    width: 300px;
+    height: 480px;
     position: relative;
-    margin-right: 200px;
+    margin-right: 80px;
     border-radius: 20px;
 
   }
 
   .h4{
     font-family: Lato;
-    font-size: 30px;
+    font-size: 25px;
     color: black;
     font-weight: Extrabold;
   }
 
   .p4{
-    font-size: 18px;
+    font-size: 15px;
     margin-top: -10px;
   }
 
   .money{
     margin-top: 10px;
-    font-size: 70px;
+    font-size: 60px;
     font-weight: 700;
     font-family: Lato;
     display: inline;
@@ -548,7 +548,7 @@
 
   .chlist{
     margin-top: 20px;
-    font-size: 13px;
+    font-size: 12px;
     text-align: left;
     margin-left: 7%;
   }
@@ -570,7 +570,7 @@
     border-radius: 10px;
     color: #fff;
     border: none;
-    margin-top: 20%;
+    margin-top: 18%;
   }
 
   .getStarted3{
@@ -580,7 +580,7 @@
     border-radius: 10px;
     color: #fff;
     border: none;
-    margin-top: 9%;
+    margin-top: 7%;
   }
 
 
